@@ -24,7 +24,7 @@ $(function(){
 						title:node.text,
 						iconCls:node.iconCls,
 						closable:true,
-						href:node.url+'.do',
+						href:node.url+'.jsp',
 					});
 				}
 			}
