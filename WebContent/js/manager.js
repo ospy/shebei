@@ -6,7 +6,10 @@ $(function(){
 	
 	obj = {
 		search:function(){
-			alert('');
+//			alert('');
+			$('#manager').datagrid('load',{
+				user:$.trim($('input[name="user"]').val()),
+			});
 		},
 	};
 	
@@ -54,7 +57,67 @@ $(function(){
 			sortable:true,
 			halign:'center'
 		}
-		]]
-		
+		]]		
 	});
+	
+	$('#manager_add').dialog({
+		width:350,
+		title:"新增管理",
+		iconCls:'icon-add',
+		modal:true,
+		closed:true,
+		buttons:[{
+			text:'提交',
+			iconCls:'icon-add',
+			handler:function(){
+				if($('#manager_add').form('validate')){
+					$.ajax({
+						url:'addManager.do',
+						type:'post',
+						data:{
+							user:$('input[name="manager"]').val(),
+							password:$('input[name="password"]').val(),
+							email:$('input[name="email"]').val(),
+						},
+						beforeSend:function(){
+							$.messager.progress({
+								text:'正在新增中...',
+							});
+						},
+					});
+				}
+			}
+		},{
+			text:'取消',
+			iconCls:'icon-cancel',
+			handler:function(){
+				$('#manager_add').dialog('close').form('reset');
+			}
+		}]
+	});
+	
+	//验证
+	$('input[name="manager"]').validatebox({
+		required:true,
+		validType:'length[2,20]',
+		missingMessage:'请输入账号',
+		invalidMessage:'管理名称在2-20位',
+	});
+	//验证
+	$('input[name="password"]').validatebox({
+		required:true,
+		validType:'length[3,20]',
+		missingMessage:'请输入管理密码',
+		invalidMessage:'管理密码在3-20位',
+	});
+	
+	//点击新增
+	manager_tool ={
+			add:function(){
+				$('#manager_add').dialog('open');
+				$('input[name="manager"]').focus();
+			}
+	};
+	
+	
 });

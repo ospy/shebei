@@ -1,0 +1,155 @@
+
+$(function(){
+
+	$('#manager').datagrid({
+		url:'keshi_data.do',
+		title:'科室列表',
+		iconCls:'icon-home',
+		fit:true,
+		fitColumns:true,
+		rownumbers:true,
+		border:false,
+		striped:true,
+		pagination:true,
+		pageSize:5,
+		pageList:[5,10,15],
+		pageNumber:1,
+		sortName:'id',
+		sortOrder:'desc',
+		toolbar:'#tb',
+		columns:[[{
+			title:"自动编号",
+			field:'id',
+			width:100,
+			checkbox:true,
+		},
+		{
+			title:"科室名",
+			field:'keshiname',
+			width:200,
+			sortable:true,
+			halign:'center'
+		},
+		{
+			title:"负责人",
+			field:'keshimanager',
+			width:300,
+			sortable:true,
+			halign:'center'
+		},
+		{
+			title:"楼层",
+			field:'keshiposition',
+			width:300,
+			sortable:true,
+			halign:'center'
+		}
+		]]		
+	});
+	
+	$('#manager_add').dialog({
+		width:350,
+		title:"新增管理",
+		iconCls:'icon-add',
+		modal:true,
+		closed:true,
+		buttons:[{
+			text:'提交',
+			iconCls:'icon-add',
+			handler:function(){
+				if($('#manager_add').form('validate')){
+					$.ajax({
+						url:'addKeshi.do',
+						type:'post',
+						data:{
+							keshiname:$('input[name="keshiname"]').val(),
+							keshimanager:$('input[name="keshimanager"]').val(),
+							keshiposition:$('input[name="keshiposition"]').val(),
+						},
+						beforeSend:function(){
+							$.messager.progress({
+								text:'正在新增中...',
+							});
+						},
+						success:function(data,response,status){
+							$.messager.progress('close');
+							if(data>0){
+								$.messager.show({
+									title:'提示',
+									msg:'新增科室成功',
+								});
+								$('#manager_add').dialog('close').form('reset');
+								$('#manager').datagrid('reload');//刷新
+							}else{
+								$.messager.alert('新增失败！','未知错误！','warning');
+							}
+						},
+					});
+				}
+			}
+		},{
+			text:'取消',
+			iconCls:'icon-cancel',
+			handler:function(){
+				$('#manager_add').dialog('close').form('reset');
+			}
+		}]
+	});
+	
+	//验证
+	$('input[name="keshiname"]').validatebox({
+		required:true,
+		validType:'length[2,20]',
+		missingMessage:'请输入科室名',
+		invalidMessage:'科室名称在2-20位',
+	});
+	//验证
+	$('input[name="keshimanager"]').validatebox({
+		required:true,
+		validType:'length[2,10]',
+		missingMessage:'请输入科室负责人',
+		invalidMessage:'科室负责人名称在2-10位',
+	});
+	
+	
+	manager_tool ={
+			//点击新增
+			add:function(){
+				$('#manager_add').dialog('open');
+				$('input[name="keshiname"]').focus();
+			},
+			//编辑
+			edit:function(){
+				var rows = $('#manager').datagrid('getSelections');
+				if(rows.length>1){
+					$.messager.alert('操作提示！','编辑记录只能选择一条记录！','warning');
+				}else if(rows.length==1){
+					$.ajax({
+						url:'getkeshi.do',
+						type:'post',
+						data:{
+							id:rows[0].id,
+						},
+						beforeSend:function(){
+							$.messager.progress({
+								text:'正在获取中...',
+							});
+						},
+						success:function(data,response,status){
+							$.messager.progress('close');
+							if(data){
+								
+							}else{
+								$.messager.alert('获取失败！','未知错误！','warning');
+							}
+						},
+					});
+				
+				}else if(rows.length==0){
+					$.messager.alert('新增失败！','编辑记录至少选择一条记录！','warning');
+				}
+			},
+	};
+	
+	
+});
