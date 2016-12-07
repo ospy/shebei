@@ -1,0 +1,52 @@
+package zmj.shebei.admin.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import zmj.shebei.admin.database.DBPool;
+import zmj.shebei.admin.database.DatabaseTools;
+import zmj.shebei.admin.database.RsToJsons;
+
+
+@WebServlet(name = "deleteKeshi.do", urlPatterns = { "/deleteKeshi.do" })
+public class KeshiDel extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String ids = request.getParameter("ids");
+		String sql = "delete from keshi where id in("+ids+")";
+		Connection conn = DBPool.getInstance().getConnection();
+		Statement stmt = null;
+		int result = 0;
+		try {
+			stmt = conn.createStatement();
+			result = stmt.executeUpdate(sql);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DatabaseTools.closeStatement(stmt);
+			DatabaseTools.closeConnection(conn);
+		}
+		// 响应消息
+		PrintWriter out = response.getWriter();
+		out.print(result);
+		out.close();
+	}
+
+}

@@ -29,6 +29,6 @@
 		</div>
 	</div>
 
-
+<script type="text/javascript" src="easyui/easyui-lang-zh_CN.js"></script>
 </body>
 </html>
