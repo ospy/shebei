@@ -1,6 +1,6 @@
 $(function(){
-	$('#shebei').datagrid({
-		url:'shebei_data.do',
+	$('#weixiu').datagrid({
+		url:'weixiu_data.do',
 		singleSelect:true,
 		selectOnCheck:false,
 		checkOnSelect:false,
@@ -9,18 +9,14 @@ $(function(){
 		rownumbers:true,
 		border:false,
 		striped:true,
-		pagination:true,
-		pageSize:5,
-		pageList:[5,10,15],
-		pageNumber:1,
-		sortName:'id',
+//		pagination:true,
+//		pageSize:5,
+//		pageList:[5,10,15],
+//		pageNumber:1,
+		sortName:'bgdate',
 		sortOrder:'desc',
-		toolbar:'#shebei_tb',
-		onDblClickRow:function(index,row){
-			$('#weixiu').datagrid('reload',{
-				id:row.id,
-			});//刷新
-		},
+		toolbar:'#weixiu_tb',
+
 		columns:[[{
 			title:"自动编号",
 			field:'id',
@@ -42,22 +38,22 @@ $(function(){
 			halign:'center'
 		},
 		{
-			title:"品牌",
-			field:'pinpai',
+			title:"报修时间",
+			field:'bgdate',
 			width:100,
 			sortable:true,
 			halign:'center'
 		},
 		{
-			title:"规格型号",
-			field:'xhtype',
+			title:"维修时间",
+			field:'wxdate',
 			width:100,
 			sortable:true,
 			halign:'center'
 		},
 		{
-			title:"购买日期",
-			field:'buydate',
+			title:"维修人",
+			field:'wxren',
 			width:100,
 			sortable:true,
 			halign:'center'
@@ -66,9 +62,8 @@ $(function(){
 	});
 	
 	
-	
 	//新增
-	$('#shebei_add').dialog({
+	$('#weixiu_add').dialog({
 		width:350,
 		title:"新增管理",
 		iconCls:'icon-add',
@@ -117,25 +112,28 @@ $(function(){
 		}]
 	});
 	
+	
+	
 	//工具栏
-	shebei_tool ={
-			//刷新
-			reload:function(){
-				$('#shebei').datagrid('reload');
-			},
+	weixiu_tool ={
+
 			//取消选择
 			redo:function(){
-				$('#shebei').datagrid('clearChecked');
+				$('#weixiu').datagrid('clearChecked');
 			},
 			//点击新增
 			add:function(){
-				$('#shebei_add').dialog('open');
-				$('input[name="keshiname"]').focus();
+				var rows = $('#shebei').datagrid('getSelected');
+				if(rows){
+					$('#weixiu_add').dialog('open');
+					$('input[name="bgren"]').focus();
+				}else{
+					$.messager.alert('提示','请先选择要添加维修记录的设备！','info');
+				}
 			},
 			//删除
 			remove:function(){
 				var rows = $('#keshi').datagrid('getChecked');
-//				var rows = $('#keshi').datagrid('getSelections');
 				if(rows.length>0){
 					$.messager.confirm('确定操作',"您真的要删除所选中的记录吗？",function(flag){
 						if(flag){

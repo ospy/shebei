@@ -20,7 +20,7 @@
 		<ul id="nav"></ul>
 	</div>
 
-	<div data-options="region:'south',border:true" style="height: 30px; padding: 2px; text-align: center;">&copy;Zhaomj 2016-2020</div>
+	<div data-options="region:'south',border:true" style="height: 20px; padding: 2px; text-align: center;">&copy;Zhaomj 2016-2020</div>
 
 	<div data-options="region:'center'">
 		<div id="tabs">

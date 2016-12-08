@@ -3,10 +3,67 @@
 
 <div class="easyui-layout" data-options="fit:true">
 
-	<div id="p" data-options="region:'south',border:false" title="详细信息" style="height: 250px;">
+	
+<!-- 上部 -->
+	<div data-options="region:'center',border:false " >
+		<table id="shebei"></table>
+		<div id="shebei_tb" style="padding: 5px">
+			<div style="margin-bottom: 5px">
+				<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="shebei_tool.add();">添加</a> 
+				<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"	onclick="shebei_tool.edit();">修改</a> 
+				<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="shebei_tool.remove();">删除</a> 
+				<a href="#" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="shebei_tool.reload();">刷新</a> 
+				<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="shebei_tool.redo();">取消选择</a>
+			</div>
+		</div>
+		<!-- 设备添加-->	
+		<form id="shebei_add" style="margin: 0; padding: 5px 0 0 25px; color: #333;">
+		<p>科室名称：<input type="text" name="shebeiname" class="textbox" style="width:200px"></p>
+		<p>科室负责人：<input type="text" name="shebeimanager" class="textbox" style="width:200px"></p>
+		<p>科室楼层：<input type="text" name="shebeiposition" class="textbox" style="width:200px"></p>
+		</form>
+		<!-- 设备添加  end-->
+		
+		<!-- 设备编辑-->	
+		<form id="shebei_edit" style="margin: 0; padding: 5px 0 0 25px; color: #333;">
+		<input type="hidden" name="shebeiid" class="textbox" style="width:200px">
+		<p>科室名称：<input type="text" name="shebeiname_edit" class="textbox" style="width:200px"></p>
+		<p>科室负责人：<input type="text" name="shebeimanager_edit" class="textbox" style="width:200px"></p>
+		<p>科室楼层：<input type="text" name="shebeiposition_edit" class="textbox" style="width:200px"></p>
+		</form>
+		<!-- 设备编辑  end-->	
+	</div>
+<!-- 上部  end-->	
+<!-- 下部-->	
+	<div id="p" data-options="region:'south',border:false" title="更多信息" style="height: 250px;">
 		<div class="easyui-tabs" data-options="tabWidth:112,fit:true,border:false">
-			<div title="维修管理" style="padding: 10px">
-				<p>Home Content.</p>
+			<div title="维修管理" style="padding: 1px">
+				<table id="weixiu"></table>
+				<div id="weixiu_tb">
+					<div style="margin-bottom: 2px">
+						<a href="#" class="easyui-linkbutton" iconCls="icon-add2" plain="true" onclick="weixiu_tool.add();">添加</a> 
+						<a href="#" class="easyui-linkbutton" iconCls="icon-edit1" plain="true"	onclick="weixiu_tool.edit();">修改</a> 
+						<a href="#" class="easyui-linkbutton" iconCls="icon-del" plain="true" onclick="weixiu_tool.remove();">删除</a> 
+						<a href="#" class="easyui-linkbutton" iconCls="icon-undo1" plain="true" onclick="weixiu_tool.redo();">取消选择</a>
+					</div>
+				</div>
+				
+				<!-- 维修添加-->	
+				<form id="weixiu_add" style="margin: 0; padding: 5px 0 0 25px; color: #333;">
+				<p>报修人：<input type="text" name="bgren" class="textbox" style="width:200px"></p>
+				<p>报修时间：<input type="text" name="weixiumanager" class="textbox" style="width:200px"></p>
+				<p>科室楼层：<input type="text" name="weixiuposition" class="textbox" style="width:200px"></p>
+				</form>
+				<!-- 维修添加  end-->	
+				
+				<!-- 维修编辑-->	
+				<form id="weixiu_edit" style="margin: 0; padding: 5px 0 0 25px; color: #333;">
+				<input type="hidden" name="weixiuid" class="textbox" style="width:200px">
+				<p>科室名称：<input type="text" name="weixiuname_edit" class="textbox" style="width:200px"></p>
+				<p>科室负责人：<input type="text" name="weixiumanager_edit" class="textbox" style="width:200px"></p>
+				<p>科室楼层：<input type="text" name="weixiuposition_edit" class="textbox" style="width:200px"></p>
+				</form>
+				<!-- 维修编辑  end-->	
 			</div>
 			<div title="文档管理" style="padding: 10px">
 				<p>Maps Content.</p>
@@ -28,20 +85,14 @@
 			</div>
 		</div>
 	</div>
+<!-- 下部  end-->	
 
-	<div data-options="region:'center',border:false " title="设备列表">
-		<table id="shebei">
-		</table>
-		<div id="shebei_tb" style="padding: 5px">
-			<div style="margin-bottom: 5px">
-				<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="shebei_tool.add();">添加</a> 
-				<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true"	onclick="shebei_tool.edit();">修改</a> 
-				<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="shebei_tool.remove();">删除</a> 
-				<a href="#" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="shebei_tool.reload();">刷新</a> 
-				<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="shebei_tool.redo();">取消选择</a>
-			</div>
-		</div>
-	</div>
+
 
 </div>
+
+			
+
+
 <script type="text/javascript" src="./js/shebei.js"></script>
+<script type="text/javascript" src="./js/weixiu.js"></script>

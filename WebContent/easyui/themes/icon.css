@@ -1,3 +1,18 @@
+.icon-refresh{
+	background:url('icons/refresh.png') no-repeat center center;
+}
+.icon-undo1{
+	background:url('icons/undo1.png') no-repeat center center;
+}
+.icon-del{
+	background:url('icons/del.png') no-repeat center center;
+}
+.icon-edit1{
+	background:url('icons/edit1.png') no-repeat center center;
+}
+.icon-add2{
+	background:url('icons/add2.png') no-repeat center center;
+}
 .icon-icon146{
 	background:url('icons/icon146.png') no-repeat center center;
 }
