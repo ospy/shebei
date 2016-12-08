@@ -5,6 +5,9 @@ $(function(){
 		url:'keshi_data.do',
 //		title:'科室列表',
 //		iconCls:'icon-home',
+		singleSelect:true,
+		selectOnCheck:false,
+		checkOnSelect:false,
 		fit:true,
 		fitColumns:true,
 		rownumbers:true,
@@ -171,7 +174,8 @@ $(function(){
 			},
 			//取消选择
 			redo:function(){
-				$('#keshi').datagrid('unselectAll');
+				$('#keshi').datagrid('clearChecked');
+//				$('#keshi').datagrid('unselectAll');
 			},
 			//点击新增
 			add:function(){
@@ -180,7 +184,8 @@ $(function(){
 			},
 			//删除
 			remove:function(){
-				var rows = $('#keshi').datagrid('getSelections');
+				var rows = $('#keshi').datagrid('getChecked');
+//				var rows = $('#keshi').datagrid('getSelections');
 				if(rows.length>0){
 					$.messager.confirm('确定操作',"您真的要删除所选中的记录吗？",function(flag){
 						if(flag){

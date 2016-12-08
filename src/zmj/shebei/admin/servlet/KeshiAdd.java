@@ -30,7 +30,7 @@ public class KeshiAdd extends HttpServlet {
 		String keshiposition = request.getParameter("keshimanager");
 		String sql = "insert into keshi(keshiname,keshimanager,keshiposition) "
 				+ "values('"+keshiname+"','"+keshimanager+"','"+keshiposition+"')";
-		System.out.println(sql);
+//		System.out.println(sql);
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt = null;
 		int result = 0;

@@ -1,3 +1,8 @@
+.north_el {
+    background-image: url("/shebei/image/blue.png");
+    height: 60px;
+}
+
 .dialog-button{
 	text-align:center;
 }
