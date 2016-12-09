@@ -16,6 +16,9 @@
 <p>科室名称：<input type="text" name="keshiname" class="textbox" style="width:200px"></p>
 <p>科室负责人：<input type="text" name="keshimanager" class="textbox" style="width:200px"></p>
 <p>科室楼层：<input type="text" name="keshiposition" class="textbox" style="width:200px"></p>
+
+<input id="rl"></input>
+
 </form>
 
 <form id="keshi_edit" style="margin: 0; padding: 5px 0 0 25px; color: #333;">

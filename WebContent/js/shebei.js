@@ -22,54 +22,20 @@ $(function(){
 			});//刷新
 		},
 		columns:[[{
-			title:"自动编号",
-			field:'id',
-			width:100,
-			checkbox:true,
-		},
-		{
-			title:"设备编号",
-			field:'code',
-			width:100,
-			sortable:true,
-			halign:'center'
-		},
-		{
-			title:"设备名称",
-			field:'name',
-			width:150,
-			sortable:true,
-			halign:'center'
-		},
-		{
-			title:"品牌",
-			field:'pinpai',
-			width:100,
-			sortable:true,
-			halign:'center'
-		},
-		{
-			title:"规格型号",
-			field:'xhtype',
-			width:100,
-			sortable:true,
-			halign:'center'
-		},
-		{
-			title:"购买日期",
-			field:'buydate',
-			width:100,
-			sortable:true,
-			halign:'center'
-		}
-		]]		
+			title:"自动编号",field:'id',width:100,checkbox:true,		},
+		{	title:"设备编号",	field:'code',width:100,sortable:true,halign:'center'},
+		{	title:"设备名称",	field:'name',width:150,	sortable:true,	halign:'center'},
+		{	title:"品牌",	field:'pinpai',	width:100,	sortable:true,	halign:'center'},
+		{	title:"规格型号",	field:'xhtype',	width:100,	sortable:true,	halign:'center'},
+		{	title:"购买日期",	field:'buydate',width:100,	sortable:true,	halign:'center'}
+		]]	
 	});
 	
 	
 	
 	//新增
 	$('#shebei_add').dialog({
-		width:350,
+		width:650,
 		title:"新增管理",
 		iconCls:'icon-add',
 		modal:true,
@@ -78,41 +44,13 @@ $(function(){
 			text:'提交',
 			iconCls:'icon-ok',
 			handler:function(){
-				if($('#keshi_add').form('validate')){
-					$.ajax({
-						url:'addKeshi.do',
-						type:'post',
-						data:{
-							keshiname:$('input[name="keshiname"]').val(),
-							keshimanager:$('input[name="keshimanager"]').val(),
-							keshiposition:$('input[name="keshiposition"]').val(),
-						},
-						beforeSend:function(){
-							$.messager.progress({
-								text:'正在新增中...',
-							});
-						},
-						success:function(data,response,status){
-							$.messager.progress('close');
-							if(data>0){
-								$.messager.show({
-									title:'提示',
-									msg:'新增科室成功',
-								});
-								$('#keshi_add').dialog('close').form('reset');
-								$('#keshi').datagrid('reload');//刷新
-							}else{
-								$.messager.alert('新增失败！','未知错误！','warning');
-							}
-						},
-					});
-				}
+				
 			}
 		},{
 			text:'取消',
 			iconCls:'icon-cancel',
 			handler:function(){
-				$('#keshi_add').dialog('close').form('reset');
+				$('#shebei_add').dialog('close').form('clear');
 			}
 		}]
 	});
@@ -130,7 +68,7 @@ $(function(){
 			//点击新增
 			add:function(){
 				$('#shebei_add').dialog('open');
-				$('input[name="keshiname"]').focus();
+//				$('input[name="keshiname"]').focus();
 			},
 			//删除
 			remove:function(){

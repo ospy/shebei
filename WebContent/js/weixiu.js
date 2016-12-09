@@ -18,96 +18,37 @@ $(function(){
 		toolbar:'#weixiu_tb',
 
 		columns:[[{
-			title:"自动编号",
-			field:'id',
-			width:100,
-			checkbox:true,
-		},
-		{
-			title:"设备编号",
-			field:'code',
-			width:100,
-			sortable:true,
-			halign:'center'
-		},
-		{
-			title:"设备名称",
-			field:'name',
-			width:150,
-			sortable:true,
-			halign:'center'
-		},
-		{
-			title:"报修时间",
-			field:'bgdate',
-			width:100,
-			sortable:true,
-			halign:'center'
-		},
-		{
-			title:"维修时间",
-			field:'wxdate',
-			width:100,
-			sortable:true,
-			halign:'center'
-		},
-		{
-			title:"维修人",
-			field:'wxren',
-			width:100,
-			sortable:true,
-			halign:'center'
-		}
+			title:"自动编号",	field:'id',	width:100,checkbox:true,},
+		{	title:"设备编号",	field:'code',width:100,sortable:true,halign:'center'},
+		{	title:"设备名称",	field:'name',width:150,	sortable:true,halign:'center'},
+		{	title:"报修时间",	field:'bgdate',width:100,sortable:true,halign:'center'},
+		{	title:"维修时间",	field:'wxdate',	width:100,	sortable:true,	halign:'center'},
+		{	title:"维修人",	field:'wxren',width:100,sortable:true,	halign:'center'	}
 		]]		
 	});
 	
 	
 	//新增
 	$('#weixiu_add').dialog({
-		width:350,
+		width:650,
 		title:"新增管理",
 		iconCls:'icon-add',
 		modal:true,
 		closed:true,
+		onBeforeOpen:function(){
+
+		},
 		buttons:[{
 			text:'提交',
 			iconCls:'icon-ok',
 			handler:function(){
-				if($('#keshi_add').form('validate')){
-					$.ajax({
-						url:'addKeshi.do',
-						type:'post',
-						data:{
-							keshiname:$('input[name="keshiname"]').val(),
-							keshimanager:$('input[name="keshimanager"]').val(),
-							keshiposition:$('input[name="keshiposition"]').val(),
-						},
-						beforeSend:function(){
-							$.messager.progress({
-								text:'正在新增中...',
-							});
-						},
-						success:function(data,response,status){
-							$.messager.progress('close');
-							if(data>0){
-								$.messager.show({
-									title:'提示',
-									msg:'新增科室成功',
-								});
-								$('#keshi_add').dialog('close').form('reset');
-								$('#keshi').datagrid('reload');//刷新
-							}else{
-								$.messager.alert('新增失败！','未知错误！','warning');
-							}
-						},
-					});
-				}
+				
 			}
 		},{
 			text:'取消',
 			iconCls:'icon-cancel',
 			handler:function(){
-				$('#keshi_add').dialog('close').form('reset');
+				$('#weixiu_add').dialog('close').form('reset');
 			}
 		}]
 	});
@@ -126,14 +67,13 @@ $(function(){
 				var rows = $('#shebei').datagrid('getSelected');
 				if(rows){
 					$('#weixiu_add').dialog('open');
-					$('input[name="bgren"]').focus();
 				}else{
 					$.messager.alert('提示','请先选择要添加维修记录的设备！','info');
 				}
 			},
 			//删除
 			remove:function(){
-				var rows = $('#keshi').datagrid('getChecked');
+				var rows = $('#weixiu').datagrid('getChecked');
 				if(rows.length>0){
 					$.messager.confirm('确定操作',"您真的要删除所选中的记录吗？",function(flag){
 						if(flag){
@@ -148,13 +88,13 @@ $(function(){
 									ids:ids.join(','),
 								},
 								beforeSend:function(){
-									$('#keshi').datagrid('loading');
+									$('#weixiu').datagrid('loading');
 								},
 								success:function(data){
 									if(data){
-										$('#keshi').datagrid('loaded');
-										$('#keshi').datagrid('load');
-										$('#keshi').datagrid('unselectAll');
+										$('#weixiu').datagrid('loaded');
+										$('#weixiu').datagrid('load');
+										$('#weixiu').datagrid('unselectAll');
 										$.messager.show({
 											title:'提示',
 											msg:data+'个科室被删除成功！',
@@ -170,7 +110,7 @@ $(function(){
 			},
 			//编辑
 			edit:function(){
-				var rows = $('#keshi').datagrid('getSelections');
+				var rows = $('#weixiu').datagrid('getSelections');
 				if(rows.length>1){
 					$.messager.alert('操作提示！','编辑记录只能选择一条记录！','warning');
 				}else if(rows.length==1){
@@ -189,7 +129,7 @@ $(function(){
 							$.messager.progress('close');
 							if(data){
 								var obj = $.parseJSON(data);
-								$('#keshi_edit').form('load',{
+								$('#weixiu_edit').form('load',{
 									keshiid:obj[0].id,
 									keshiname_edit:obj[0].keshiname,
 									keshimanager_edit:obj[0].keshimanager,

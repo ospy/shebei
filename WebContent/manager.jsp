@@ -20,6 +20,7 @@
 <p>账号：<input type="text" name="manager" class="textbox" style="width:200px"></p>
 <p>密码：<input type="text" name="password" class="textbox" style="width:200px"></p>
 <p>Email：<input type="text" name="email" class="textbox" style="width:200px"></p>
+<input class="easyui-datebox"></input>
 </form>
 
 <script type="text/javascript" src="js/manager.js"></script>

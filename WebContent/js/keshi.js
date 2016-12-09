@@ -1,6 +1,9 @@
 
 $(function(){
-
+	$('#rl').datebox({
+		
+	});
+	
 	$('#keshi').datagrid({
 		url:'keshi_data.do',
 //		title:'科室列表',
@@ -21,32 +24,10 @@ $(function(){
 		sortOrder:'desc',
 		toolbar:'#keshi_tb',
 		columns:[[{
-			title:"自动编号",
-			field:'id',
-			width:100,
-			checkbox:true,
-		},
-		{
-			title:"科室名",
-			field:'keshiname',
-			width:200,
-			sortable:true,
-			halign:'center'
-		},
-		{
-			title:"负责人",
-			field:'keshimanager',
-			width:300,
-			sortable:true,
-			halign:'center'
-		},
-		{
-			title:"楼层",
-			field:'keshiposition',
-			width:300,
-			sortable:true,
-			halign:'center'
-		}
+			title:"自动编号",	field:'id',	width:100,checkbox:true,},
+		{	title:"科室名",	field:'keshiname',	width:200,	sortable:true,halign:'center'},
+		{	title:"负责人",	field:'keshimanager',width:300,	sortable:true,	halign:'center'},
+		{	title:"楼层",field:'keshiposition',	width:300,	sortable:true,	halign:'center'}
 		]]		
 	});
 	

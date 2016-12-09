@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-
-<div class="easyui-layout" data-options="fit:true">
-
-	
+<div class="easyui-layout" data-options="fit:true">	
 <!-- 上部 -->
 	<div data-options="region:'center',border:false " >
 		<table id="shebei"></table>
@@ -15,13 +11,23 @@
 				<a href="#" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="shebei_tool.reload();">刷新</a> 
 				<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="shebei_tool.redo();">取消选择</a>
 			</div>
+			<div style="padding: 0 0 0 7px;color: #333">
+			查询账户：<input type="text" name="user" class="textbox" style="width: 110px">
+			创建时间从：<input type="text" name="date_from" class="easyui-datebox" style="width: 110px">
+			到：<input type="text" name="date_to" class="easyui-datebox"  style="width: 110px">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="obj.search();">查询</a>
+			</div>
 		</div>
+		
 		<!-- 设备添加-->	
-		<form id="shebei_add" style="margin: 0; padding: 5px 0 0 25px; color: #333;">
+		<div id="shebei_add">
+		<input class="easyui-datebox">
+		<form  style="margin: 0; padding: 5px 0 0 25px; color: #333;">
 		<p>科室名称：<input type="text" name="shebeiname" class="textbox" style="width:200px"></p>
-		<p>科室负责人：<input type="text" name="shebeimanager" class="textbox" style="width:200px"></p>
+		<p>科室负责人：<input type="text" name="date_too" class="easyui-datebox"  style="width: 110px"></p>
 		<p>科室楼层：<input type="text" name="shebeiposition" class="textbox" style="width:200px"></p>
 		</form>
+		</div>
 		<!-- 设备添加  end-->
 		
 		<!-- 设备编辑-->	
@@ -47,22 +53,16 @@
 						<a href="#" class="easyui-linkbutton" iconCls="icon-undo1" plain="true" onclick="weixiu_tool.redo();">取消选择</a>
 					</div>
 				</div>
-				
 				<!-- 维修添加-->	
-				<form id="weixiu_add" style="margin: 0; padding: 5px 0 0 25px; color: #333;">
-				<p>报修人：<input type="text" name="bgren" class="textbox" style="width:200px"></p>
-				<p>报修时间：<input type="text" name="weixiumanager" class="textbox" style="width:200px"></p>
-				<p>科室楼层：<input type="text" name="weixiuposition" class="textbox" style="width:200px"></p>
+				<form id="weixiu_add">
+				  <input class="easyui-datebox"></input>
 				</form>
+				
+				
 				<!-- 维修添加  end-->	
 				
 				<!-- 维修编辑-->	
-				<form id="weixiu_edit" style="margin: 0; padding: 5px 0 0 25px; color: #333;">
-				<input type="hidden" name="weixiuid" class="textbox" style="width:200px">
-				<p>科室名称：<input type="text" name="weixiuname_edit" class="textbox" style="width:200px"></p>
-				<p>科室负责人：<input type="text" name="weixiumanager_edit" class="textbox" style="width:200px"></p>
-				<p>科室楼层：<input type="text" name="weixiuposition_edit" class="textbox" style="width:200px"></p>
-				</form>
+				
 				<!-- 维修编辑  end-->	
 			</div>
 			<div title="文档管理" style="padding: 10px">
@@ -84,15 +84,13 @@
 				<p>Contact Content.</p>
 			</div>
 		</div>
+		
 	</div>
+</div>
 <!-- 下部  end-->	
-
-
-
 </div>
 
 			
 
 
 <script type="text/javascript" src="./js/shebei.js"></script>
-<script type="text/javascript" src="./js/weixiu.js"></script>
