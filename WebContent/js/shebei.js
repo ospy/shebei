@@ -23,8 +23,8 @@ $(function(){
 		},
 		columns:[[{
 			title:"自动编号",field:'id',width:100,checkbox:true,		},
-		{	title:"设备编号",	field:'code',width:100,sortable:true,halign:'center'},
-		{	title:"设备名称",	field:'name',width:150,	sortable:true,	halign:'center'},
+		{	title:"设备编号",	field:'sbcode',width:100,sortable:true,halign:'center'},
+		{	title:"设备名称",	field:'sbname',width:150,	sortable:true,	halign:'center'},
 		{	title:"品牌",	field:'pinpai',	width:100,	sortable:true,	halign:'center'},
 		{	title:"规格型号",	field:'xhtype',	width:100,	sortable:true,	halign:'center'},
 		{	title:"购买日期",	field:'buydate',width:100,	sortable:true,	halign:'center'}
@@ -35,7 +35,7 @@ $(function(){
 	
 	//新增
 	$('#shebei_add').dialog({
-		width:650,
+		width:840,
 		title:"新增管理",
 		iconCls:'icon-add',
 		modal:true,
@@ -44,7 +44,33 @@ $(function(){
 			text:'提交',
 			iconCls:'icon-ok',
 			handler:function(){
-				
+				console.log($('#shebei_add').serialize());
+				if($('#shebei_add').form('validate')){
+					$.ajax({
+						url:'addShebei.do',
+						type:'post',
+						data:$('#shebei_add').serialize(),
+						beforeSend:function(){
+							$.messager.progress({
+								text:'正在新增中...',
+							});
+						},
+						success:function(data,response,status){
+							$.messager.progress('close');
+							if(data>0){
+								$.messager.show({
+									title:'提示',
+									msg:'新增设备成功',
+								});
+								$('#shebei_add').dialog('close').form('reset');
+								$('#shebei').datagrid('reload');//刷新
+							}else{
+								$.messager.alert('新增失败！','未知错误！','warning');
+							}
+						},
+					});
+				}
+			
 			}
 		},{
 			text:'取消',
@@ -54,6 +80,20 @@ $(function(){
 			}
 		}]
 	});
+	
+	
+	
+	//验证
+	$('input[name="sbdengji"]').validatebox({
+		required:true,
+		validType:'length[1]',
+		missingMessage:'请输入科室名',
+		invalidMessage:'科室名称在2-20位',
+	});
+	
+	
+	
+	
 	
 	//工具栏
 	shebei_tool ={
@@ -72,7 +112,7 @@ $(function(){
 			},
 			//删除
 			remove:function(){
-				var rows = $('#keshi').datagrid('getChecked');
+				var rows = $('#shebei').datagrid('getChecked');
 //				var rows = $('#keshi').datagrid('getSelections');
 				if(rows.length>0){
 					$.messager.confirm('确定操作',"您真的要删除所选中的记录吗？",function(flag){
@@ -83,21 +123,21 @@ $(function(){
 							}
 							$.ajax({
 								type:'POST',
-								url:'deleteKeshi.do',
+								url:'deleteShebei.do',
 								data:{
 									ids:ids.join(','),
 								},
 								beforeSend:function(){
-									$('#keshi').datagrid('loading');
+									$('#shebei').datagrid('loading');
 								},
 								success:function(data){
 									if(data){
-										$('#keshi').datagrid('loaded');
-										$('#keshi').datagrid('load');
-										$('#keshi').datagrid('unselectAll');
+										$('#shebei').datagrid('loaded');
+										$('#shebei').datagrid('load');
+										$('#shebei').datagrid('unselectAll');
 										$.messager.show({
 											title:'提示',
-											msg:data+'个科室被删除成功！',
+											msg:data+'个设备被删除成功！',
 										});
 									}
 								},
@@ -110,12 +150,12 @@ $(function(){
 			},
 			//编辑
 			edit:function(){
-				var rows = $('#keshi').datagrid('getSelections');
+				var rows = $('#shebei').datagrid('getSelections');
 				if(rows.length>1){
 					$.messager.alert('操作提示！','编辑记录只能选择一条记录！','warning');
 				}else if(rows.length==1){
 					$.ajax({
-						url:'getkeshi.do',
+						url:'getShebei.do',
 						type:'post',
 						data:{
 							id:rows[0].id,
@@ -129,7 +169,7 @@ $(function(){
 							$.messager.progress('close');
 							if(data){
 								var obj = $.parseJSON(data);
-								$('#keshi_edit').form('load',{
+								$('#shebei_edit').form('load',{
 									keshiid:obj[0].id,
 									keshiname_edit:obj[0].keshiname,
 									keshimanager_edit:obj[0].keshimanager,
