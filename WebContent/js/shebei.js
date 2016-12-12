@@ -25,13 +25,63 @@ $(function(){
 			title:"自动编号",field:'id',width:100,checkbox:true,		},
 		{	title:"设备编号",	field:'sbcode',width:100,sortable:true,halign:'center'},
 		{	title:"设备名称",	field:'sbname',width:150,	sortable:true,	halign:'center'},
+		{	title:"使用科室",	field:'keshiname',width:150,	sortable:true,	halign:'center'},
 		{	title:"品牌",	field:'pinpai',	width:100,	sortable:true,	halign:'center'},
 		{	title:"规格型号",	field:'xhtype',	width:100,	sortable:true,	halign:'center'},
-		{	title:"购买日期",	field:'buydate',width:100,	sortable:true,	halign:'center'}
+		{	title:"生产日期",	field:'chuchangdate',width:100,	sortable:true,	halign:'center'},
+		{	title:"购买日期",	field:'buydate',width:100,	sortable:true,	halign:'center'},
+		{	title:"单价",	field:'danjia',width:100,	sortable:true,	halign:'center'}
 		]]	
 	});
 	
 	
+	//添加设备时 科室下拉列表
+	$('#sykeshi').combobox({
+		url:'getkeshi.do',
+		valueField:'id',
+		textField:'keshiname',
+		queryParams:{
+			"getall":"all",
+		},
+		editable:false,
+		required:true,
+	});
+		
+	//添加设备时 厂家下拉列表
+	$('#sscj').combobox({
+		url:'getsccj.do',
+		valueField:'id',
+		textField:'cjname',
+		queryParams:{
+			"getall":"all",
+		},
+		editable:false,
+		required:true,
+		missingMessage:'请选择厂家',
+	});
+	
+	//添加设备时 经销商下拉列表
+	$('#jingxiaoshang').combobox({
+		url:'getJingxiaoshang.do',
+		valueField:'id',
+		textField:'jxsname',
+		queryParams:{
+			"getall":"all",
+		},
+		editable:false,
+		required:true,
+		missingMessage:'请选择经销商',
+	});
+	
+	//添加设备时 经销商下拉列表
+	$('#sbdengji').combobox({		
+		valueField:'label',
+		textField:'value',
+		data:[{label: ' 1 ',value: '1'},{label: ' 2 ',	value: '2'},{label: ' 3 ',	value: '3'}],
+		editable:false,
+		required:true,
+		missingMessage:'请选择经设备等级',
+	});
 	
 	//新增
 	$('#shebei_add').dialog({
@@ -44,7 +94,7 @@ $(function(){
 			text:'提交',
 			iconCls:'icon-ok',
 			handler:function(){
-				console.log($('#shebei_add').serialize());
+				console.log($('#shebei_add').form('validate'));
 				if($('#shebei_add').form('validate')){
 					$.ajax({
 						url:'addShebei.do',
@@ -91,7 +141,33 @@ $(function(){
 		invalidMessage:'科室名称在2-20位',
 	});
 	
+	//验证 使用年限
+	$('#useyears').numberbox({
+		required:true,
+		missingMessage:'请填写设备使用年限',
+		width:150,
+		min:0, 
+		max:50,
+	    value:5,
+	});
 	
+	//验证 数量
+	$('#shuliang').numberbox({
+		required:true,
+		missingMessage:'请填写设备数量',
+		width:150,
+		min:0,    
+	    value:1,
+	});
+	//验证 单价
+	$('#danjia').numberbox({
+		required:true,
+		missingMessage:'请填写设备单价',
+		width:150,
+		min:0,    
+	    precision:2 ,
+	    value:0.00,
+	});
 	
 	
 	

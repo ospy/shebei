@@ -40,11 +40,23 @@ public class WeixiuUpdate extends HttpServlet {
 		String ysren_edit = request.getParameter("ysren_edit");
 		String ysdate_edit = request.getParameter("ysdate_edit");
 		String beizhu_edit = request.getParameter("beizhu_edit");
+		
+		double wxje = 0 ;
+		if(wxjine_edit != null && !wxjine_edit.equals("")){
+			wxje = Double.valueOf(wxjine_edit);
+		}
+		if(wxdate_edit.equals("")){
+			wxdate_edit ="0000-00-00 00:00:00";
+		}
+		if(ysdate_edit.equals("")){
+			ysdate_edit ="0000-00-00 00:00:00";
+		}
+		
 		String sql = "update weixiu set wxzhuangtai='"+wxzhuangtai_edit
 					+"',wxleixing='"+ wxleixing_edit
 					+"',wxkeshi='"+ wxkeshi_edit
-					+"',wxjine='"+ wxjine_edit
-					+"',wxyuanyin='"+ wxyuanyin_edit
+					+"',wxjine="+ wxje
+					+",wxyuanyin='"+ wxyuanyin_edit
 					+"',bxren='"+ bxren_edit
 					+"',bxdate='"+ bxdate_edit
 					+"',wxneirong='"+ wxneirong_edit

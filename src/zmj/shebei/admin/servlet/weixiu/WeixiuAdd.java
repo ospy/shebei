@@ -39,8 +39,19 @@ public class WeixiuAdd extends HttpServlet {
 		String ysren = request.getParameter("ysren");
 		String ysdate = request.getParameter("ysdate");
 		String beizhu = request.getParameter("beizhu");
+		double wxje = 0 ;
+		if(wxjine != null && !wxjine.equals("")){
+			wxje = Double.valueOf(wxjine);;
+		}
+		if(wxdate.equals("")){
+			wxdate ="0000-00-00 00:00:00";
+		}
+		if(ysdate.equals("")){
+			ysdate ="0000-00-00 00:00:00";
+		}
+		
 		String sql = "insert into weixiu(sbid,wxzhuangtai,wxleixing,wxkeshi,wxjine,wxyuanyin,bxren,bxdate,wxneirong,wxren,wxdate,yanshoujilu,ysren,ysdate,beizhu) "
-				+ "values('"+sbid+"','"+wxzhuangtai+"','"+wxleixing+"','"+wxkeshi+"','"+wxjine+"','"+wxyuanyin+"','"+bxren+"','"+bxdate+"','"+wxneirong+"','"+wxren+"','"+wxdate+"','"+yanshoujilu+"','"+ysren+"','"+ysdate+"','"+beizhu+"')";
+				+ "values('"+sbid+"','"+wxzhuangtai+"','"+wxleixing+"','"+wxkeshi+"',"+wxje+",'"+wxyuanyin+"','"+bxren+"','"+bxdate+"','"+wxneirong+"','"+wxren+"','"+wxdate+"','"+yanshoujilu+"','"+ysren+"','"+ysdate+"','"+beizhu+"')";
 		System.out.println(sql);
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt = null;

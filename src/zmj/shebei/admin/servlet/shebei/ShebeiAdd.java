@@ -28,7 +28,7 @@ public class ShebeiAdd extends HttpServlet {
 		 String sbname = request.getParameter("sbname");
 		 String groupdl = request.getParameter("groupdl");
 		 String groupxl = request.getParameter("groupxl");
-		 String keshi = request.getParameter("keshi");
+		 String sykeshi = request.getParameter("sykeshi");
 		 String xhtype = request.getParameter("xhtype");
 		 String pinpai = request.getParameter("pinpai");
 		 String chandi = request.getParameter("chandi");
@@ -53,11 +53,22 @@ public class ShebeiAdd extends HttpServlet {
 		 String glfenleimc = request.getParameter("glfenleimc");
 		 String jingxiaoshang = request.getParameter("jingxiaoshang");
 		 String sbdengji = request.getParameter("sbdengji");
-		String sql = "insert into shebei(sbcode,  sbname,  groupdl,  groupxl,  keshi,  xhtype,  pinpai,"
+		 
+		 if(begindate.equals("")){
+			 begindate = "0000-00-00";
+		 }
+		 if(chuchangdate.equals("")){
+			 chuchangdate = "0000-00-00";
+		 }
+		 if(buydate.equals("")){
+			 buydate = "0000-00-00";
+		 }
+		 
+		String sql = "insert into shebei(sbcode,  sbname,  groupdl,  groupxl,  sykeshi,  xhtype,  pinpai,"
 				+ "  chandi,  peizhi,  jishuguige,  buydate,  useyears,  begindate,  sbleixing,  "
 				+ "ccbianhao,  bjiliang,  chuchangdate,  sscj,  shuliang,  danwei,  danjia,  beizhu,"
 				+ "  syzhuangtai,  didian,  glfenlei,  glfenleibm,  glfenleimc,  jingxiaoshang,  sbdengji) "
-				+ "values('"+sbcode+"','"+sbname+"','"+groupdl+"','"+groupxl+"','"+keshi+"','"+xhtype
+				+ "values('"+sbcode+"','"+sbname+"','"+groupdl+"','"+groupxl+"','"+sykeshi+"','"+xhtype
 				+"','"+pinpai+"','"+chandi+"','"+peizhi+"','"+jishuguige+"','"+buydate+"','"+useyears
 				+"','"+begindate+"','"+sbleixing+"','"+ccbianhao+"','"+bjiliang+"','"+chuchangdate+"','"+sscj
 				+"','"+shuliang+"','"+danwei+"','"+danjia+"','"+beizhu+"','"+syzhuangtai+"','"+didian

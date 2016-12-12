@@ -54,7 +54,7 @@
 				    <tbody>
 				      <tr>
 				        <td width="60">设备类型</td>
-				        <td width="200"><select name="sbleixing" id="sbleixing">
+				        <td width="200"><select name="sbleixing" id="sbleixing" class="easyui-combobox">
 				          <option value="专用设备">专用设备</option>
 				          <option value="电子设备">电子设备</option>
 				        </select></td>
@@ -98,23 +98,23 @@
 				      </tr>
 				      <tr>
 				        <td>生产厂家</td>
-				        <td><input name="sscj" id="sscj" class="easyui-textbox" ></td>
+				        <td><input name="sscj" id="sscj"></td>
                         <td>产地</td>
                         <td><input name="chandi" id="chandi" class="easyui-textbox" ></td>
                         <td>使用年限</td>
-                        <td><input name="useyears" id="useyears" class="easyui-textbox" ></td>
+                        <td><input name="useyears" id="useyears" type="text" ></td>
 				      </tr>
 				      <tr>
 				        <td>数量</td>
-				        <td><input type="text" name="shuliang" id="shuliang" class="easyui-textbox"></td>
+				        <td><input type="text" name="shuliang" id="shuliang"></td>
 				        <td>单位</td>
 				        <td><input name="danwei" id="danwei" class="easyui-textbox" ></td>
                         <td>单价</td>
-                        <td><input name="danjia" id="danjia" class="easyui-textbox" ></td>
+                        <td><input name="danjia" id="danjia" type="text"></td>
 				      </tr>
 				      <tr>
 				        <td>使用部门</td>
-				        <td><input name="keshi" id="keshi" class="easyui-textbox" ></td>
+				        <td><input name="sykeshi" id="sykeshi"></td>
                         <td>使用状态</td>
                         <td><input name="syzhuangtai" id="syzhuangtai" class="easyui-textbox" ></td>
                         <td>存放地点</td>
@@ -130,9 +130,9 @@
 				      </tr>
                       <tr>
 				        <td>经销商</td>
-				        <td><input type="text" name="jingxiaoshang" id="jingxiaoshang" class="easyui-textbox"></td>
+				        <td><input type="text" name="jingxiaoshang" id="jingxiaoshang"></td>
 				        <td>设备等级</td>
-				        <td><input  name="sbdengji" id="sbdengji" class="easyui-textbox" ></td>
+				        <td><input name="sbdengji" id="sbdengji"></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
 				      </tr>
