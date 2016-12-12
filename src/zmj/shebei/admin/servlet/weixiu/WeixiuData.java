@@ -35,7 +35,7 @@ public class WeixiuData extends HttpServlet {
 		String sort = request.getParameter("sort");
 		String order = request.getParameter("order");
 
-		String sql = "select a.id,code,name,bgdate,wxdate,wxren from weixiu a,shebei b where a.sbid=b.id and sbid="+ id +" order by " + sort + " " + order ;
+		String sql = "select a.id,code,name,keshiname,wxzhuangtai,wxleixing,wxyuanyin,wxneirong, bxdate,bxren,wxdate,wxren,wxjine from weixiu a,shebei b,keshi c where a.sbid=b.id and a.wxkeshi= c.id and sbid="+ id +" order by " + sort + " " + order ;
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt = null;
 		ResultSet rs = null;

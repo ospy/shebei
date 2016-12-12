@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="css/admin.css">
@@ -24,7 +25,7 @@
 
 	<div data-options="region:'center'">
 		<div id="tabs">
-			<div title="起始页" iconCls="icon-home" style="padding: 0 10px;display: block;">
+			<div title="起始页" iconCls="icon-home" style="padding: 0 1px;display: block;">
 				
 				<div class="easyui-layout" data-options="fit:true">	
 <!-- 上部 -->
@@ -86,12 +87,12 @@
 				    <tbody>
 				      <tr>
 				        <td width="95">状    态</td>
-				        <td width="200"><select name="select" id="select">
+				        <td width="200"><select class="easyui-combobox" name="wxzhuangtai" style="width:150px;">
 				          <option value="在修">在修</option>
 				          <option value="已结束">已结束</option>
 				        </select></td>
 				        <td width="95">维修保养类型</td>
-				        <td width="200"><select>
+				        <td width="200"><select class="easyui-combobox" name="wxleixing" style="width:150px;">
 				          <option value="故障维修">故障维修</option>
 				          <option value="定期维修">定期维修</option>
 				          <option value="保养">保养</option>
@@ -99,19 +100,19 @@
 				      </tr>
 				      <tr>
 				        <td>维修科室</td>
-				        <td id="wxks"></td>
+				        <td><input id="wxkeshi" name="wxkeshi"></td>
 				        <td>维修金额</td>
-				        <td><input class="easyui-textbox" type="text" name="wxjine" id="wxjine"></td>
+				        <td><input class="easyui-numberbox" type="text" name="wxjine" id="wxjine" data-options="min:0,precision:2"></td>
 				      </tr>
 				      <tr>
 				        <td>维修保养原因</td>
 				        <td colspan="3"><input class="easyui-textbox"  name="wxyuanyin" id="wxyuanyin" data-options="multiline:true" style="height:60px;width:500px"></td>
 				      </tr>
 				      <tr>
-				        <td>检  查  人</td>
-				        <td><input type="text" name="jiancharen" id="jiancharen" class="easyui-textbox"></td>
+				        <td>报  修  人</td>
+				        <td><input type="text" name="bxren" id="bxren" class="easyui-validatebox textbox"></td>
 				        <td>检查日期</td>
-				        <td><input name="jianchadate" id="jianchadate" class="easyui-datetimebox" ></td>
+				        <td><input name="bxdate" id="bxdate" class="easyui-datetimebox" editable="false" required ="required"></td>
 				      </tr>
 				      <tr>
 				        <td>维修保养内容</td>
@@ -119,19 +120,19 @@
 				      </tr>
 				      <tr>
 				        <td>维  修  人</td>
-				        <td><input type="text" name="weixiuren" id="weixiuren" class="easyui-textbox"></td>
+				        <td><input type="text" name="wxren" id="wxren" class="easyui-textbox"></td>
 				        <td>维修时间</td>
-				        <td><input name="weixiudate" id="weixiudate" class="easyui-datetimebox" ></td>
+				        <td><input name="wxdate" id="wxdate" class="easyui-datetimebox" editable="false"></td>
 				      </tr>
 				      <tr>
 				        <td>验收记录</td>
-				        <td colspan="3"><input class="easyui-textbox" name="jiancharen6" id="jiancharen6" data-options="multiline:true" style="height:60px;width:500px"></td>
+				        <td colspan="3"><input class="easyui-textbox" name="yanshoujilu" id="yanshoujilu" data-options="multiline:true" style="height:60px;width:500px"></td>
 				      </tr>
 				      <tr>
 				        <td>验收人员</td>
-				        <td><input type="text" name="yanshouren" id="yanshouren" class="easyui-textbox"></td>
+				        <td><input type="text" name="ysren" id="ysren" class="easyui-textbox"></td>
 				        <td>验收日期</td>
-				        <td><input  name="yanshoudate" id="yanshoudate" class="easyui-datebox" ></td>
+				        <td><input  name="ysdate" id="ysdate" class="easyui-datebox" editable="false"></td>
 				      </tr>
 				      <tr>
 				        <td>备        注</td>
@@ -143,7 +144,66 @@
 				<!-- 维修添加  end-->	
 				
 				<!-- 维修编辑-->	
-				
+				<form id="weixiu_edit" style="margin: 0; padding: 5px 0 0 25px; color: #333;">
+				<input type="hidden" name="weixiuid" class="textbox" style="width:200px">
+				  <table width="590" height="350" >
+				    <tbody>
+				      <tr>
+				        <td width="95">状    态</td>
+				        <td width="200"><select class="easyui-combobox" name="wxzhuangtai_edit" style="width:150px;">
+				          <option value="在修">在修</option>
+				          <option value="已结束">已结束</option>
+				        </select></td>
+				        <td width="95">维修保养类型</td>
+				        <td width="200"><select class="easyui-combobox" name="wxleixing_edit" style="width:150px;">
+				          <option value="故障维修">故障维修</option>
+				          <option value="定期维修">定期维修</option>
+				          <option value="保养">保养</option>
+				        </select></td>
+				      </tr>
+				      <tr>
+				        <td>维修科室</td>
+				        <td><input id="wxkeshi_edit" name="wxkeshi_edit"></td>
+				        <td>维修金额</td>
+				        <td><input class="easyui-textbox" type="text" name="wxjine_edit" id="wxjine_edit"></td>
+				      </tr>
+				      <tr>
+				        <td>维修保养原因</td>
+				        <td colspan="3"><input class="easyui-textbox"  name="wxyuanyin_edit" id="wxyuanyin_edit" data-options="multiline:true" style="height:60px;width:500px"></td>
+				      </tr>
+				      <tr>
+				        <td>报  修  人</td>
+				        <td><input type="text" name="bxren_edit" id="bxren_edit" class="easyui-textbox"></td>
+				        <td>检查日期</td>
+				        <td><input name="bxdate_edit" id="bxdate_edit" class="easyui-datetimebox" editable="true" required ="required"></td>
+				      </tr>
+				      <tr>
+				        <td>维修保养内容</td>
+				        <td colspan="3"><input class="easyui-textbox"  name="wxneirong_edit" id="wxneirong_edit" data-options="multiline:true" style="height:60px;width:500px"></td>
+				      </tr>
+				      <tr>
+				        <td>维  修  人</td>
+				        <td><input type="text" name="wxren_edit" id="wxren_edit" class="easyui-textbox"></td>
+				        <td>维修时间</td>
+				        <td><input name="wxdate_edit" id="wxdate_edit" class="easyui-datetimebox" ></td>
+				      </tr>
+				      <tr>
+				        <td>验收记录</td>
+				        <td colspan="3"><input class="easyui-textbox" name="yanshoujilu_edit" id="yanshoujilu_edit" data-options="multiline:true" style="height:60px;width:500px"></td>
+				      </tr>
+				      <tr>
+				        <td>验收人员</td>
+				        <td><input type="text" name="ysren_edit" id="ysren_edit" class="easyui-textbox"></td>
+				        <td>验收日期</td>
+				        <td><input  name="ysdate_edit" id="ysdate_edit" class="easyui-datebox" ></td>
+				      </tr>
+				      <tr>
+				        <td>备        注</td>
+				        <td colspan="3"><input name="beizhu_edit" id="beizhu_edit" class="easyui-textbox" data-options="multiline:true" style="height:60px;width:500px"></td>
+				      </tr>
+				    </tbody>
+				  </table>
+				</form>
 				<!-- 维修编辑  end-->	
 				</div>
 			</div>
@@ -182,5 +242,13 @@
 <script type="text/javascript" src="test.js"></script>
 <script type="text/javascript" src="js/shebei.js"></script>
 <script type="text/javascript" src="js/weixiu.js"></script>
+<style scoped="scoped">
+		.textbox{
+			height:20px;
+			margin:0;
+			padding:0 2px;
+			box-sizing:content-box;
+		}
+	</style>
 </body>
 </html>

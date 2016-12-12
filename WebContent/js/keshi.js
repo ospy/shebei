@@ -1,8 +1,6 @@
 
 $(function(){
-	$('#rl').datebox({
-		
-	});
+	
 	
 	$('#keshi').datagrid({
 		url:'keshi_data.do',

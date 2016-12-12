@@ -1,4 +1,4 @@
-package zmj.shebei.admin.servlet;
+package zmj.shebei.admin.servlet.weixiu;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,24 +17,22 @@ import zmj.shebei.admin.database.DBPool;
 import zmj.shebei.admin.database.DatabaseTools;
 import zmj.shebei.admin.database.RsToJsons;
 
-@WebServlet(name = "getkeshi.do", urlPatterns = { "/getkeshi.do" })
-public class KeshiGet extends HttpServlet {
+
+@WebServlet(name = "getweixiu.do", urlPatterns = { "/getweixiu.do" })
+public class WeixiuGet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 	}
+
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		String id = request.getParameter("id");
 		String sql ="";
-		if(id!=null){
-			sql = "select * from keshi where id="+id;
-		}
-		String getall = request.getParameter("getall");
-		if(getall != null && getall.equals("all")){
-			sql="select * from keshi";
-		}
+		sql = "select * from weixiu where id="+id;
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -43,7 +41,6 @@ public class KeshiGet extends HttpServlet {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			responseContent = RsToJsons.resultSetToJson(rs);
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
