@@ -1,4 +1,4 @@
-package zmj.shebei.admin.servlet.weixiu;
+package zmj.shebei.admin.servlet.shebei;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,25 +17,20 @@ import zmj.shebei.admin.database.DBPool;
 import zmj.shebei.admin.database.DatabaseTools;
 import zmj.shebei.admin.database.RsToJsons;
 
-@WebServlet(name = "weixiu_data.do", urlPatterns = { "/weixiu_data.do" })
-public class WeixiuData extends HttpServlet {
+@WebServlet(name = "getShebei.do", urlPatterns = { "/getShebei.do" })
+public class ShebeiGet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		String sid = request.getParameter("id");
-		int id = 5;
-		if(sid!=null){
-			id = Integer.parseInt(request.getParameter("id"));
-		}
-		String sort = request.getParameter("sort");
-		String order = request.getParameter("order");
-
-		String sql = "select a.id,sbcode,sbname,keshiname,wxzhuangtai,wxleixing,wxyuanyin,wxneirong, bxdate,bxren,wxdate,wxren,wxjine from weixiu a,shebei b,keshi c where a.sbid=b.id and a.wxkeshi= c.id and sbid="+ id +" order by " + sort + " " + order ;
+		String id = request.getParameter("id");
+		String sql = "select * from shebei where id="+id;
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -44,7 +39,6 @@ public class WeixiuData extends HttpServlet {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			responseContent = RsToJsons.resultSetToJson(rs);
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
