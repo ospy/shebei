@@ -50,11 +50,11 @@ public class ShebeiData extends HttpServlet {
 		
 		String date_from = request.getParameter("date_from");
 		if(date_from != null && date_from !=""){
-			sqlwhere += " buydate > '"+ date_from +"' and";
+			sqlwhere += " buydate >= '"+ date_from +"' and";
 		}
 		String date_to = request.getParameter("date_to");
 		if(date_to != null && date_to !=""){
-			sqlwhere += " buydate < '"+ date_to +"' and";
+			sqlwhere += " buydate <= '"+ date_to +"' and";
 		}
 		String bjiliang_search = request.getParameter("bjiliang_search");
 		if(bjiliang_search != null && bjiliang_search !=""){

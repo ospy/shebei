@@ -39,7 +39,7 @@
 				<a href="#" class="easyui-linkbutton" iconCls="icon-reload" plain="true" onclick="shebei_tool.reload();">刷新</a> 
 				<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="shebei_tool.redo();">取消选择</a>
 			</div>
-			<div style="padding: 0 0 0 7px;color: #333">
+			<div style="padding: 0 0 0 7px;color: #333"><form id="chaxuntiaojian">
 			设备编号或名称：<input type="text" name="sb_search" class="textbox" style="width: 110px">
 			使用科室：<input id="sykeshi_search" name="sykeshi_search" style="width: 110px">
 			购买时间从：<input type="text" name="date_from" class="easyui-datebox" style="width: 110px">
@@ -47,8 +47,9 @@
 			计量设备：<input type="checkbox" name="bjiliang_search" id="bjiliang_search">
 			上报医保：<input type="checkbox" name="shangbaoyb_search" id="shangbaoyb_search">
 			卫计委：<input type="checkbox" name="shangbaowjw_search" id="shangbaowjw_search">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="search.search();">查询</a>
-			</div>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="searchsb.search();">查询</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="searchsb.qingkong();">清空条件</a>
+			</form></div>
 		</div>
 		
 		<!-- 设备添加-->	

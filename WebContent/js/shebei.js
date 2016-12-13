@@ -1,17 +1,34 @@
 $(function(){
 	
-	search = {
+	searchsb = {
 			search:function(){
-//				alert('');
-				$('#manager').datagrid('load',{
+//				alert($("#sykeshi_search").combobox('getValues'));
+//				alert($("#bjiliang_search").is(":checked")?'on':'');
+				$('#shebei').datagrid('load',{
 					sb_search:$.trim($('input[name="sb_search"]').val()),
-					sykeshi_search:$.trim($('input[name="sykeshi_search"]').val()),
+					sykeshi_search:$.trim($("#sykeshi_search").combobox('getValues')),
+//					sykeshi_search:$.trim($('input[name="sykeshi_search"]').val()),
 					date_from:$.trim($('input[name="date_from"]').val()),
 					date_to:$.trim($('input[name="date_to"]').val()),
-					bjiliang_search:$.trim($('input[name="bjiliang_search"]').val()),
-					shangbaoyb_search:$.trim($('input[name="shangbaoyb_search"]').val()),
-					shangbaowjw_search:$.trim($('input[name="shangbaowjw_search"]').val()),
+					bjiliang_search:$("#bjiliang_search").is(":checked")?'on':'',
+					shangbaoyb_search:$.trim($('input[name="shangbaoyb_search"]:checked').val()),
+					shangbaowjw_search:$.trim($('input[name="shangbaowjw_search"]:checked').val()),
 				});
+			},
+			qingkong:function(){
+//				$('#chaxuntiaojian').form('reset');
+				$('#chaxuntiaojian').form('clear');
+////				alert($('#date_from').textbox('getValue'));
+//				$("#sykeshi_search").removeAttr('selected');//清空下拉框
+////				$("#sykeshi_search").empty();//清空下拉框
+//				$("#bjiliang_search").val('');//不打勾
+//				$("#shangbaoyb_search").val('');//不打勾
+////				$("#shangbaowjw_search").attr("checked",'');//不打勾
+//				$("#shangbaowjw_search").val('');//不打勾
+//				$('#date_from').combo('reset'); 
+//				$('#date_to').combo('reset'); 
+				$('#sykeshi_search').combobox('reload');
+				$('#shebei').datagrid('load',{});
 			},
 		};
 	
