@@ -1,4 +1,20 @@
 $(function(){
+	
+	search = {
+			search:function(){
+//				alert('');
+				$('#manager').datagrid('load',{
+					sb_search:$.trim($('input[name="sb_search"]').val()),
+					sykeshi_search:$.trim($('input[name="sykeshi_search"]').val()),
+					date_from:$.trim($('input[name="date_from"]').val()),
+					date_to:$.trim($('input[name="date_to"]').val()),
+					bjiliang_search:$.trim($('input[name="bjiliang_search"]').val()),
+					shangbaoyb_search:$.trim($('input[name="shangbaoyb_search"]').val()),
+					shangbaowjw_search:$.trim($('input[name="shangbaowjw_search"]').val()),
+				});
+			},
+		};
+	
 	$('#shebei').datagrid({
 		url:'shebei_data.do',
 		singleSelect:true,
@@ -23,17 +39,62 @@ $(function(){
 		},
 		columns:[[{
 			title:"自动编号",field:'id',width:100,checkbox:true,		},
-		{	title:"设备编号",	field:'sbcode',width:100,sortable:true,halign:'center'},
+		{	title:"设备编号",	field:'sbcode',width:50,sortable:true,halign:'center'},
 		{	title:"设备名称",	field:'sbname',width:150,	sortable:true,	halign:'center'},
 		{	title:"使用科室",	field:'keshiname',width:150,	sortable:true,	halign:'center'},
 		{	title:"品牌",	field:'pinpai',	width:100,	sortable:true,	halign:'center'},
 		{	title:"规格型号",	field:'xhtype',	width:100,	sortable:true,	halign:'center'},
 		{	title:"生产日期",	field:'chuchangdate',width:100,	sortable:true,	halign:'center'},
 		{	title:"购买日期",	field:'buydate',width:100,	sortable:true,	halign:'center'},
-		{	title:"单价",	field:'danjia',width:100,	sortable:true,	halign:'center'}
+		{	title:"单价",	field:'danjia',width:50,	sortable:true,	halign:'center'},
+		{	title:"计量",	field:'bjiliang',width:50,	sortable:true,	halign:'center'},
+		{	title:"医保",	field:'shangbaoyb',width:50,	sortable:true,	halign:'center'},
+		{	title:"卫计委",	field:'shangbaowjw',width:50,	sortable:true,	halign:'center'},
 		]]	
 	});
 	
+	
+	//添加设备时 医保大类下拉列表
+	$('#groupdl').combobox({
+		url:'getYbfenlei.do?pid=0',
+		valueField:'id',
+		textField:'flname',
+//		queryParams:{
+//			"getall":"all",
+//		},
+		editable:false,
+		required:true,
+		onSelect: function(rec){    
+            var url = 'getYbfenlei.do?pid='+rec.id;    
+            $('#groupxl').combobox('reload', url);    
+        }
+	});
+	
+	
+	//检索设备时 科室下拉列表
+	$('#sykeshi_search').combobox({
+		url:'getkeshi.do',
+		valueField:'id',
+		textField:'keshiname',
+		queryParams:{
+			"getall":"all",
+		},
+		editable:false,
+		multiple:true,
+	});
+	
+	
+	//添加设备时 医保小类下拉列表
+	$('#groupxl').combobox({
+		url:'getYbfenlei.do',
+		valueField:'id',
+		textField:'flname',
+		queryParams:{
+			"pid":"",
+		},
+		editable:false,
+		required:true
+	});
 	
 	//添加设备时 科室下拉列表
 	$('#sykeshi').combobox({
@@ -169,6 +230,132 @@ $(function(){
 	    value:0.00,
 	});
 	
+	//-------------修改
+	
+	//修改设备时 医保大类下拉列表
+	$('#groupdl_edit').combobox({
+		url:'getYbfenlei.do?pid=0',
+		valueField:'id',
+		textField:'flname',
+		editable:false,
+		required:true,
+		onSelect: function(rec){    
+            var url = 'getYbfenlei.do?pid='+rec.id;    
+            $('#groupxl_edit').combobox('reload', url);    
+        }
+	});
+	
+	//修改设备时 医保小类下拉列表
+	$('#groupxl_edit').combobox({
+		url:'getYbfenlei.do',
+		valueField:'id',
+		textField:'flname',
+		queryParams:{
+			"pid":"",
+		},
+		editable:false,
+		required:true
+	});
+	
+	//修改设备时 科室下拉列表
+	$('#sykeshi_edit').combobox({
+		url:'getkeshi.do',
+		valueField:'id',
+		textField:'keshiname',
+		queryParams:{
+			"getall":"all",
+		},
+		editable:false,
+		required:true,
+	});
+		
+	//修改设备时 厂家下拉列表
+	$('#sscj_edit').combobox({
+		url:'getsccj.do',
+		valueField:'id',
+		textField:'cjname',
+		queryParams:{
+			"getall":"all",
+		},
+		editable:false,
+		required:true,
+		missingMessage:'请选择厂家',
+	});
+	
+	//修改设备时 经销商下拉列表
+	$('#jingxiaoshang_edit').combobox({
+		url:'getJingxiaoshang.do',
+		valueField:'id',
+		textField:'jxsname',
+		queryParams:{
+			"getall":"all",
+		},
+		editable:false,
+		required:true,
+		missingMessage:'请选择经销商',
+	});
+	
+	//修改设备时 经销商下拉列表
+	$('#sbdengji_edit').combobox({		
+		valueField:'label',
+		textField:'value',
+		data:[{label: ' 1 ',value: '1'},{label: ' 2 ',	value: '2'},{label: ' 3 ',	value: '3'}],
+		editable:false,
+		required:true,
+		missingMessage:'请选择经设备等级',
+	});
+	
+	
+	
+	
+	//修改设备
+	$('#shebei_edit').dialog({
+		width:840,
+		title:"修改管理",
+		iconCls:'icon-edit',
+		modal:true,
+		closed:true,
+		buttons:[{
+			text:'提交',
+			iconCls:'icon-edit',
+			handler:function(){
+				if($('#shebei_edit').form('validate')){
+//					console.log('#shebei_edit=' +$('#shebei_edit').serialize());
+					$.ajax({
+						url:'updateShebei.do',
+						type:'post',
+						data:$('#shebei_edit').serialize(),
+						beforeSend:function(){
+							$.messager.progress({
+								text:'正在更新中...',
+							});
+						},
+						success:function(data,response,status){
+							$.messager.progress('close');
+							if(data>0){
+								$.messager.show({
+									title:'提示',
+									msg:'修改设备信息成功',
+								});
+								$('#shebei_edit').dialog('close').form('reset');
+								$('#shebei').datagrid('reload');//刷新
+							}else{
+								$.messager.alert('修改失败！','未知错误或没有任何修改！','warning');
+							}
+						},
+					});
+				}
+			}
+		},{
+			text:'取消',
+			iconCls:'icon-cancel',
+			handler:function(){
+				$('#shebei_edit').dialog('close').form('reset');
+			}
+		}]
+	});
+	
+	
 	
 	
 	//工具栏
@@ -246,10 +433,38 @@ $(function(){
 							if(data){
 								var obj = $.parseJSON(data);
 								$('#shebei_edit').form('load',{
-									keshiid:obj[0].id,
-									keshiname_edit:obj[0].keshiname,
-									keshimanager_edit:obj[0].keshimanager,
-									keshiposition_edit:obj[0].keshiposition,
+									shebeiid:obj[0].id,
+									sbcode_edit : obj[0].sbcode,
+									sbname_edit : obj[0].sbname,
+									groupdl_edit : obj[0].groupdl,
+									groupxl_edit : obj[0].groupxl,
+									sykeshi_edit : obj[0].sykeshi,
+									xhtype_edit : obj[0].xhtype,
+									pinpai_edit : obj[0].pinpai,
+									chandi_edit : obj[0].chandi,
+									peizhi_edit : obj[0].peizhi,
+									jishuguige_edit : obj[0].jishuguige,
+									buydate_edit : obj[0].buydate,
+									useyears_edit : obj[0].useyears,
+									begindate_edit : obj[0].begindate,
+									sbleixing_edit : obj[0].sbleixing,
+									ccbianhao_edit : obj[0].ccbianhao,
+									bjiliang_edit : obj[0].bjiliang,
+									chuchangdate_edit : obj[0].chuchangdate,
+									sscj_edit : obj[0].sscj,
+									shuliang_edit : obj[0].shuliang,
+									danwei_edit : obj[0].danwei,
+									danjia_edit : obj[0].danjia,
+									beizhu_edit : obj[0].beizhu,
+									syzhuangtai_edit : obj[0].syzhuangtai,
+									didian_edit : obj[0].didian,
+									glfenlei_edit : obj[0].glfenlei,
+									glfenleibm_edit : obj[0].glfenleibm,
+									glfenleimc_edit : obj[0].glfenleimc,
+									jingxiaoshang_edit : obj[0].jingxiaoshang,
+									sbdengji_edit : obj[0].sbdengji,
+									shangbaoyb_edit : obj[0].shangbaoyb,
+									shangbaowjw_edit : obj[0].shangbaowjw,
 								}).dialog('open');
 							}else{
 								$.messager.alert('获取失败！','未知错误！','warning');

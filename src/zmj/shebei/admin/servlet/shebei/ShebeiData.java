@@ -37,8 +37,48 @@ public class ShebeiData extends HttpServlet {
 		String sort = request.getParameter("sort");
 		String order = request.getParameter("order");
 
-		String sql = "select a.*, b.keshiname from shebei a, keshi b where a.sykeshi=b.id order by " + sort + " " + order + " limit " + first + ", "
+		String sqlwhere="";
+		String sb_search = request.getParameter("sb_search");
+		if(sb_search != null && sb_search !=""){
+			sqlwhere += " (sbcode like '%"+ sb_search +"%' or sbname like '%"+ sb_search +"%' or ccbianhao like '%"+ sb_search +"%') and";
+		}
+		
+		String sykeshi_search = request.getParameter("sykeshi_search");
+		if(sykeshi_search != null && sykeshi_search !=""){
+			sqlwhere += " sykeshi in ("+ sykeshi_search +") and";
+		}
+		
+		String date_from = request.getParameter("date_from");
+		if(date_from != null && date_from !=""){
+			sqlwhere += " buydate > '"+ date_from +"' and";
+		}
+		String date_to = request.getParameter("date_to");
+		if(date_to != null && date_to !=""){
+			sqlwhere += " buydate < '"+ date_to +"' and";
+		}
+		String bjiliang_search = request.getParameter("bjiliang_search");
+		if(bjiliang_search != null && bjiliang_search !=""){
+			sqlwhere += " bjiliang = '"+ bjiliang_search +"' and";
+		}
+		String shangbaoyb_search = request.getParameter("shangbaoyb_search");
+		if(shangbaoyb_search != null && shangbaoyb_search !=""){
+			sqlwhere += " shangbaoyb = '"+ shangbaoyb_search +"' and";
+		}
+		String shangbaowjw_search = request.getParameter("shangbaowjw_search");
+		if(shangbaowjw_search != null && shangbaowjw_search !=""){
+			sqlwhere += " shangbaowjw = '"+ shangbaowjw_search +"' and";
+		}
+		
+		
+		if(sqlwhere !=""){
+			sqlwhere = sqlwhere.substring(0, sqlwhere.length()-4);
+			sqlwhere = " and " + sqlwhere;
+		}
+		
+		
+		String sql = "select a.*, b.keshiname from shebei a, keshi b where a.sykeshi=b.id "+sqlwhere+" order by " + sort + " " + order + " limit " + first + ", "
 				+ pagesize;
+		System.out.println(sql);
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt = null;
 		ResultSet rs = null;

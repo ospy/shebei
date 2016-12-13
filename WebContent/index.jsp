@@ -40,10 +40,14 @@
 				<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="shebei_tool.redo();">取消选择</a>
 			</div>
 			<div style="padding: 0 0 0 7px;color: #333">
-			查询账户：<input type="text" name="user" class="textbox" style="width: 110px">
-			创建时间从：<input type="text" name="date_from" class="easyui-datebox" style="width: 110px">
+			设备编号或名称：<input type="text" name="sb_search" class="textbox" style="width: 110px">
+			使用科室：<input id="sykeshi_search" name="sykeshi_search" style="width: 110px">
+			购买时间从：<input type="text" name="date_from" class="easyui-datebox" style="width: 110px">
 			到：<input type="text" name="date_to" class="easyui-datebox"  style="width: 110px">
-			<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="obj.search();">查询</a>
+			计量设备：<input type="checkbox" name="bjiliang_search" id="bjiliang_search">
+			上报医保：<input type="checkbox" name="shangbaoyb_search" id="shangbaoyb_search">
+			卫计委：<input type="checkbox" name="shangbaowjw_search" id="shangbaowjw_search">
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="search.search();">查询</a>
 			</div>
 		</div>
 		
@@ -59,21 +63,15 @@
 				          <option value="电子设备">电子设备</option>
 				        </select></td>
 				        <td width="60">医保大类</td>
-				        <td width="200"><select name="groupdl" id="groupdl">
-				          <option value="故障维修">故障维修</option>
-				          <option value="定期维修">定期维修</option>
-				          <option value="保养">保养</option>
-				        </select></td>
+				        <td width="200"><input name="groupdl" id="groupdl">
+				        </td>
                         <td width="60">医保小类</td>
-                        <td width="200"><select name="groupxl" id="groupxl">
-                          <option value="故障维修">故障维修</option>
-                          <option value="定期维修">定期维修</option>
-                          <option value="保养">保养</option>
-                        </select></td>
+                        <td width="200"><input name="groupxl" id="groupxl">
+                        </td>
 				      </tr>
 				      <tr>
 				        <td>设备编号</td>
-				        <td id="wxks"><input class="easyui-textbox" type="text" name="sbcode" id="sbcode"></td>
+				        <td><input class="easyui-textbox" type="text" name="sbcode" id="sbcode"></td>
 				        <td>设备名称</td>
 				        <td><input class="easyui-textbox" type="text" name="sbname" id="sbname"></td>
                         <td>出厂编号</td>
@@ -133,8 +131,10 @@
 				        <td><input type="text" name="jingxiaoshang" id="jingxiaoshang"></td>
 				        <td>设备等级</td>
 				        <td><input name="sbdengji" id="sbdengji"></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td>医保上报</td>
+                        <td><input type="checkbox" name="shangbaoyb" id="shangbaoyb">                         
+                           &nbsp;&nbsp;卫计委上报
+                           <input type="checkbox" name="shangbaowjw" id="shangbaowjw"></td>
 				      </tr>
 				      <tr>
 				        <td height="32">技术规格</td>
@@ -157,9 +157,102 @@
 		<!-- 设备编辑-->	
 		<form id="shebei_edit" style="margin: 0; padding: 5px 0 0 25px; color: #333;">
 		<input type="hidden" name="shebeiid" class="textbox" style="width:200px">
-		<p>科室名称：<input type="text" name="shebeiname_edit" class="textbox" style="width:200px"></p>
-		<p>科室负责人：<input type="text" name="shebeimanager_edit" class="textbox" style="width:200px"></p>
-		<p>科室楼层：<input type="text" name="shebeiposition_edit" class="textbox" style="width:200px"></p>
+		<table width="800" height="326" >
+				    <tbody>
+				      <tr>
+				        <td width="60">设备类型</td>
+				        <td width="200"><select name="sbleixing_edit" id="sbleixing_edit" class="easyui-combobox">
+				          <option value="专用设备">专用设备</option>
+				          <option value="电子设备">电子设备</option>
+				        </select></td>
+				        <td width="60">医保大类</td>
+				        <td width="200"><input name="groupdl_edit" id="groupdl_edit">
+				        </td>
+                        <td width="60">医保小类</td>
+                        <td width="200"><input name="groupxl_edit" id="groupxl_edit">
+                        </td>
+				      </tr>
+				      <tr>
+				        <td>设备编号</td>
+				        <td><input class="easyui-textbox" type="text" name="sbcode_edit" id="sbcode_edit"></td>
+				        <td>设备名称</td>
+				        <td><input class="easyui-textbox" type="text" name="sbname_edit" id="sbname_edit"></td>
+                        <td>出厂编号</td>
+                        <td><input class="easyui-textbox" type="text" name="ccbianhao_edit" id="ccbianhao_edit"></td>
+				      </tr>
+				      <tr>
+				        <td>设备品牌</td>
+				        <td><input class="easyui-textbox" type="text" name="pinpai_edit" id="pinpai_edit"></td>
+                        <td>设备型号</td>
+                        <td><input class="easyui-textbox" type="text" name="xhtype_edit" id="xhtype_edit"></td>
+                        <td>计量设备</td>
+                        <td><input type="checkbox" name="bjiliang_edit" id="bjiliang_edit">
+                        </td>
+				      </tr>
+				      <tr>
+				        <td>出厂日期</td>
+				        <td><input type="text" name="chuchangdate_edit" id="chuchangdate_edit" class="easyui-datebox"></td>
+				        <td>购买日期</td>
+				        <td><input name="buydate_edit" id="buydate_edit" class="easyui-datebox" ></td>
+                        <td>启用时间</td>
+                        <td><input name="begindate_edit" id="begindate_edit" class="easyui-datebox" ></td>
+				      </tr>
+				      <tr>
+				        <td>生产厂家</td>
+				        <td><input name="sscj_edit" id="sscj_edit"></td>
+                        <td>产地</td>
+                        <td><input name="chandi_edit" id="chandi_edit" class="easyui-textbox" ></td>
+                        <td>使用年限</td>
+                        <td><input name="useyears_edit" id="useyears_edit" type="text" ></td>
+				      </tr>
+				      <tr>
+				        <td>数量</td>
+				        <td><input type="text" name="shuliang_edit" id="shuliang_edit"></td>
+				        <td>单位</td>
+				        <td><input name="danwei_edit" id="danwei_edit" class="easyui-textbox" ></td>
+                        <td>单价</td>
+                        <td><input name="danjia_edit" id="danjia_edit" type="text"></td>
+				      </tr>
+				      <tr>
+				        <td>使用部门</td>
+				        <td><input name="sykeshi_edit" id="sykeshi_edit"></td>
+                        <td>使用状态</td>
+                        <td><input name="syzhuangtai_edit" id="syzhuangtai_edit" class="easyui-textbox" ></td>
+                        <td>存放地点</td>
+                        <td><input name="didian_edit" id="didian_edit" class="easyui-textbox" ></td>
+				      </tr>
+				      <tr>
+				        <td>管理分类</td>
+				        <td><input type="text" name="glfenlei_edit" id="glfenlei_edit" class="easyui-textbox"></td>
+				        <td>分类编码</td>
+				        <td><input  name="glfenleibm_edit" id="glfenleibm_edit" class="easyui-textbox" ></td>
+                        <td>分类名称</td>
+                        <td><input name="glfenleimc_edit" id="glfenleimc_edit" class="easyui-textbox" ></td>
+				      </tr>
+                      <tr>
+				        <td>经销商</td>
+				        <td><input type="text" name="jingxiaoshang_edit" id="jingxiaoshang_edit"></td>
+				        <td>设备等级</td>
+				        <td><input name="sbdengji_edit" id="sbdengji_edit"></td>
+                        <td>医保上报</td>
+                        <td><input type="checkbox" name="shangbaoyb_edit" id="shangbaoyb_edit">                         
+                           &nbsp;&nbsp;卫计委上报
+                           <input type="checkbox" name="shangbaowjw_edit" id="shangbaowjw_edit"></td>
+				      </tr>
+				      <tr>
+				        <td height="32">技术规格</td>
+				        <td colspan="5"><input name="jishuguige_edit" id="jishuguige_edit" class="easyui-textbox" data-options="multiline:true" style="height:30px;width:600px"></td>
+				      </tr>
+                      <tr>
+				        <td height="32">详细配置</td>
+				        <td colspan="5"><input name="peizhi_edit" id="peizhi_edit" class="easyui-textbox" data-options="multiline:true" style="height:30px;width:600px"></td>
+				      </tr>
+                      <tr>
+				        <td height="32">备        注</td>
+				        <td colspan="5"><input name="beizhu_edit" id="beizhu_edit" class="easyui-textbox" data-options="multiline:true" style="height:30px;width:600px"></td>
+				      </tr>
+				    </tbody>
+				  </table>
 		</form>
 		<!-- 设备编辑  end-->	
 	</div>

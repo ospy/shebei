@@ -19,8 +19,8 @@ $(function(){
 
 		columns:[[{
 			title:"自动编号",	field:'id',	width:20,checkbox:true,},
-		{	title:"设备编号",	field:'code',width:40,sortable:true,halign:'center'},
-		{	title:"设备名称",	field:'name',width:70,	sortable:true,halign:'center'},
+		{	title:"设备编号",	field:'sbcode',width:40,sortable:true,halign:'center'},
+		{	title:"设备名称",	field:'sbname',width:70,	sortable:true,halign:'center'},
 		{	title:"维修科室",	field:'keshiname',width:40,sortable:true,halign:'center'},
 		{	title:"维修状态",	field:'wxzhuangtai',width:30,sortable:true,halign:'center'},
 		{	title:"维修类型",	field:'wxleixing',width:30,sortable:true,halign:'center'},
@@ -139,7 +139,7 @@ $(function(){
 							if(data>0){
 								$.messager.show({
 									title:'提示',
-									msg:'修改维修成功',
+									msg:'修改维修记录成功',
 								});
 								$('#weixiu_edit').dialog('close').form('reset');
 								$('#weixiu').datagrid('reload');//刷新

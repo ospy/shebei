@@ -53,6 +53,8 @@ public class ShebeiAdd extends HttpServlet {
 		 String glfenleimc = request.getParameter("glfenleimc");
 		 String jingxiaoshang = request.getParameter("jingxiaoshang");
 		 String sbdengji = request.getParameter("sbdengji");
+		 String shangbaoyb = request.getParameter("shangbaoyb");
+		 String shangbaowjw = request.getParameter("shangbaowjw");
 		 
 		 if(begindate.equals("")){
 			 begindate = "0000-00-00";
@@ -67,12 +69,12 @@ public class ShebeiAdd extends HttpServlet {
 		String sql = "insert into shebei(sbcode,  sbname,  groupdl,  groupxl,  sykeshi,  xhtype,  pinpai,"
 				+ "  chandi,  peizhi,  jishuguige,  buydate,  useyears,  begindate,  sbleixing,  "
 				+ "ccbianhao,  bjiliang,  chuchangdate,  sscj,  shuliang,  danwei,  danjia,  beizhu,"
-				+ "  syzhuangtai,  didian,  glfenlei,  glfenleibm,  glfenleimc,  jingxiaoshang,  sbdengji) "
+				+ "  syzhuangtai,  didian,  glfenlei,  glfenleibm,  glfenleimc,  jingxiaoshang,  sbdengji ,shangbaoyb ,shangbaowjw) "
 				+ "values('"+sbcode+"','"+sbname+"','"+groupdl+"','"+groupxl+"','"+sykeshi+"','"+xhtype
 				+"','"+pinpai+"','"+chandi+"','"+peizhi+"','"+jishuguige+"','"+buydate+"','"+useyears
 				+"','"+begindate+"','"+sbleixing+"','"+ccbianhao+"','"+bjiliang+"','"+chuchangdate+"','"+sscj
 				+"','"+shuliang+"','"+danwei+"','"+danjia+"','"+beizhu+"','"+syzhuangtai+"','"+didian
-				+"','"+glfenlei+"','"+glfenleibm+"','"+glfenleimc+"','"+jingxiaoshang+"','"+sbdengji+"')";
+				+"','"+glfenlei+"','"+glfenleibm+"','"+glfenleimc+"','"+jingxiaoshang+"','"+sbdengji+"','"+shangbaoyb+"','"+shangbaowjw+"')";
 		System.out.println(sql);
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt = null;
