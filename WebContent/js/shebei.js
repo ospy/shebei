@@ -2,11 +2,13 @@ $(function(){
 	
 	searchsb = {
 			search:function(){
-//				alert($("#sykeshi_search").combobox('getValues'));
+//				alert($("#sbleixing_search").combobox('getValues'));
 //				alert($("#bjiliang_search").is(":checked")?'on':'');
 				$('#shebei').datagrid('load',{
 					sb_search:$.trim($('input[name="sb_search"]').val()),
+					sbdengji_search:$.trim($('input[name="sbdengji_search"]').val()),
 					sykeshi_search:$.trim($("#sykeshi_search").combobox('getValues')),
+					sbleixing_search:$.trim($("#sbleixing_search").combobox('getValues')),
 //					sykeshi_search:$.trim($('input[name="sykeshi_search"]').val()),
 					date_from:$.trim($('input[name="date_from"]').val()),
 					date_to:$.trim($('input[name="date_to"]').val()),
@@ -43,8 +45,8 @@ $(function(){
 		border:false,
 		striped:true,
 		pagination:true,
-		pageSize:5,
-		pageList:[5,10,15],
+		pageSize:20,
+		pageList:[10,20,30],
 		pageNumber:1,
 		sortName:'id',
 		sortOrder:'desc',
@@ -58,9 +60,11 @@ $(function(){
 			title:"自动编号",field:'id',width:100,checkbox:true,		},
 		{	title:"设备编号",	field:'sbcode',width:50,sortable:true,halign:'center'},
 		{	title:"设备名称",	field:'sbname',width:150,	sortable:true,	halign:'center'},
-		{	title:"使用科室",	field:'keshiname',width:150,	sortable:true,	halign:'center'},
-		{	title:"品牌",	field:'pinpai',	width:100,	sortable:true,	halign:'center'},
+		{	title:"使用科室",	field:'keshiname',width:50,	sortable:true,	halign:'center'},
+		{	title:"存放地点",	field:'didian',width:50,	sortable:true,	halign:'center'},
+		{	title:"品牌",	field:'pinpai',	width:50,	sortable:true,	halign:'center'},
 		{	title:"规格型号",	field:'xhtype',	width:100,	sortable:true,	halign:'center'},
+		{	title:"出厂编号",	field:'ccbianhao',	width:100,	sortable:true,	halign:'center'},
 		{	title:"生产日期",	field:'chuchangdate',width:100,	sortable:true,	halign:'center'},
 		{	title:"购买日期",	field:'buydate',width:100,	sortable:true,	halign:'center'},
 		{	title:"单价",	field:'danjia',width:50,	sortable:true,	halign:'center'},
@@ -76,9 +80,6 @@ $(function(){
 		url:'getYbfenlei.do?pid=0',
 		valueField:'id',
 		textField:'flname',
-//		queryParams:{
-//			"getall":"all",
-//		},
 		editable:false,
 		required:true,
 		onSelect: function(rec){    

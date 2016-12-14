@@ -44,9 +44,14 @@
 			使用科室：<input id="sykeshi_search" name="sykeshi_search" style="width: 110px">
 			购买时间从：<input type="text" name="date_from" class="easyui-datebox" style="width: 110px">
 			到：<input type="text" name="date_to" class="easyui-datebox"  style="width: 110px">
-			计量设备：<input type="checkbox" name="bjiliang_search" id="bjiliang_search">
+			&nbsp;&nbsp;计量设备：<input type="checkbox" name="bjiliang_search" id="bjiliang_search">
+			设备类型：<select name="sbleixing_search" id="sbleixing_search" class="easyui-combobox">
+				          <option value="专用设备">专用设备</option>
+				          <option value="电子设备">电子设备</option>
+				        </select>&nbsp;&nbsp;
 			上报医保：<input type="checkbox" name="shangbaoyb_search" id="shangbaoyb_search">
-			卫计委：<input type="checkbox" name="shangbaowjw_search" id="shangbaowjw_search">
+			卫计委：<input type="checkbox" name="shangbaowjw_search" id="shangbaowjw_search">&nbsp;&nbsp;
+			设备等级：<input type="text" name="sbdengji_search" class="textbox" style="width: 50px">
 			<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="searchsb.search();">查询</a>
 			<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="searchsb.qingkong();">清空条件</a>
 			</form></div>

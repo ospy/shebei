@@ -68,6 +68,14 @@ public class ShebeiData extends HttpServlet {
 		if(shangbaowjw_search != null && shangbaowjw_search !=""){
 			sqlwhere += " shangbaowjw = '"+ shangbaowjw_search +"' and";
 		}
+		String sbleixing_search = request.getParameter("sbleixing_search");
+		if(sbleixing_search != null && sbleixing_search !=""){
+			sqlwhere += " sbleixing = '"+ sbleixing_search +"' and";
+		}
+		String sbdengji_search = request.getParameter("sbdengji_search");
+		if(sbdengji_search != null && sbdengji_search !=""){
+			sqlwhere += " sbdengji >= "+ sbdengji_search +" and";
+		}
 		
 		
 		if(sqlwhere !=""){
@@ -88,7 +96,7 @@ public class ShebeiData extends HttpServlet {
 			rs = stmt.executeQuery(sql);
 			responseContent = RsToJsons.resultSetToJson(rs);
 
-			String sql2 = "select COUNT(*) from shebei";
+			String sql2 = "select count(*) from shebei a, keshi b where a.sykeshi=b.id "+sqlwhere;
 			rs = stmt.executeQuery(sql2);
 			rs.next();
 			int total = rs.getInt(1);

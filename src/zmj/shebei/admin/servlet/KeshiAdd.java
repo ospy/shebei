@@ -27,7 +27,7 @@ public class KeshiAdd extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		String keshiname = request.getParameter("keshiname");
 		String keshimanager = request.getParameter("keshimanager");
-		String keshiposition = request.getParameter("keshimanager");
+		String keshiposition = request.getParameter("keshiposition");
 		String sql = "insert into keshi(keshiname,keshimanager,keshiposition) "
 				+ "values('"+keshiname+"','"+keshimanager+"','"+keshiposition+"')";
 //		System.out.println(sql);
