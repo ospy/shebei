@@ -25,6 +25,8 @@ public class WeixiuUpdate extends HttpServlet {
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		String weixiuid = request.getParameter("weixiuid");
 		String wxzhuangtai_edit = request.getParameter("wxzhuangtai_edit");
 		String wxleixing_edit = request.getParameter("wxleixing_edit");

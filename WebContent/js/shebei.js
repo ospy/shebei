@@ -54,7 +54,10 @@ $(function(){
 		onDblClickRow:function(index,row){
 			$('#weixiu').datagrid('reload',{
 				id:row.id,
-			});//刷新
+			});//刷新维修数据
+			$('#zhuanyi').datagrid('reload',{
+				id:row.id,
+			});//刷新转移数据
 		},
 		columns:[[{
 			title:"自动编号",field:'id',width:100,checkbox:true,		},
