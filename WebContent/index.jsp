@@ -414,8 +414,79 @@
 			<div title="附属设备" style="padding: 10px">
 				<p>References Content.</p>
 			</div>
-			<div title="转移管理" style="padding: 10px">
-				<p>Contact Content.</p>
+			<div title="转移管理" style="padding: 1px">
+				<table id="zhuanyi"></table>
+				<div id="zhuanyi_tb">
+					<div style="margin-bottom: 2px">
+						<a href="#" class="easyui-linkbutton" iconCls="icon-add2" plain="true" onclick="zhuanyi_tool.add();">添加</a> 
+						<a href="#" class="easyui-linkbutton" iconCls="icon-edit1" plain="true"	onclick="zhuanyi_tool.edit();">修改</a> 
+						<a href="#" class="easyui-linkbutton" iconCls="icon-del" plain="true" onclick="zhuanyi_tool.remove();">删除</a> 
+						<a href="#" class="easyui-linkbutton" iconCls="icon-undo1" plain="true" onclick="zhuanyi_tool.redo();">取消选择</a>
+					</div>
+				</div>
+				<!-- 转移添加-->	
+				<form id="zhuanyi_add" style="margin: 0; padding: 5px 0 0 25px; color: #333;">
+				<table width="590">
+				    <tbody>
+				      <tr>
+				        <td width="95">调拨日期</td>
+				        <td width="200"><input name="diaobodate" id="diaobodate" class="easyui-datebox" editable="false" /></td>
+				        <td width="95">批准人</td>
+				        <td width="200"><input type="text" name="pizhunren" id="pizhunren" class="easyui-textbox" /></td>
+				      </tr>
+				      <tr>
+				        <td>原科室</td>
+				        <td><input id="oldkeshi" name="oldkeshi"><input type="hidden" name="hiddenoldkeshi" id="hiddenoldkeshi"></td>
+				        <td>原存放地</td>
+				        <td><input class="easyui-textbox"  data-options="disabled:true" type="text" name="olddidian" id="olddidian">
+				        <input name="hiddenolddidian" id="hiddenolddidian"  type="hidden"></td>
+				      </tr>
+				      <tr>
+				        <td>新科室</td>
+				        <td><input name="newkeshi" id="newkeshi"></td>
+				        <td>新存放地</td>
+				        <td><input name="newdidian" id="newdidian" class="easyui-textbox"  type="text"></td>
+				      </tr>
+				      <tr>
+				        <td>备        注</td>
+				        <td colspan="3"><input name="zybeizhu" id="zybeizhu" class="easyui-textbox" data-options="multiline:true" style="height:60px;width:450px"></td>
+				      </tr>
+				    </tbody>
+				  </table>
+				</form>
+				<!-- 转移添加  end-->	
+				
+				<!-- 转移修改-->	
+				<form id="zhuanyi_edit" style="margin: 0; padding: 5px 0 0 25px; color: #333;">
+				<input type="hidden" name="zhuanyiid" class="textbox" style="width:200px">
+				<table width="590">
+				    <tbody>
+				      <tr>
+				        <td width="95">调拨日期</td>
+				        <td width="200"><input name="diaobodate_edit" id="diaobodate_edit" class="easyui-datebox" editable="false" /></td>
+				        <td width="95">批准人</td>
+				        <td width="200"><input type="text" name="pizhunren_edit" id="pizhunren_edit" class="easyui-textbox" /></td>
+				      </tr>
+				      <tr>
+				        <td>原科室</td>
+				        <td><input id="oldkeshi_edit" name="oldkeshi_edit"></td>
+				        <td>原存放地</td>
+				        <td><input class="easyui-textbox" data-options="disabled:true" type="text" name="olddidian_edit" id="olddidian_edit"></td>
+				      </tr>
+				      <tr>
+				        <td>新科室</td>
+				        <td><input name="newkeshi_edit" id="newkeshi_edit"></td>
+				        <td>新存放地</td>
+				        <td><input name="newdidian_edit" id="newdidian_edit" class="easyui-textbox"  type="text"></td>
+				      </tr>
+				      <tr>
+				        <td>备        注</td>
+				        <td colspan="3"><input name="zybeizhu_edit" id="zybeizhu_edit" class="easyui-textbox" data-options="multiline:true" style="height:60px;width:450px"></td>
+				      </tr>
+				    </tbody>
+				  </table>
+				</form>
+				<!-- 维修修改  end-->	
 			</div>
 			<div title="图片信息" style="padding: 10px">
 				<p>Contact Content.</p>
@@ -437,6 +508,7 @@
 <script type="text/javascript" src="test.js"></script>
 <script type="text/javascript" src="js/shebei.js"></script>
 <script type="text/javascript" src="js/weixiu.js"></script>
+<script type="text/javascript" src="js/zhuanyi.js"></script>
 <style scoped="scoped">
 		.textbox{
 			height:20px;
