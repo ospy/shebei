@@ -488,8 +488,27 @@
 				</form>
 				<!-- 维修修改  end-->	
 			</div>
-			<div title="图片信息" style="padding: 10px">
-				<p>Contact Content.</p>
+			<div title="图片信息" style="padding: 1px">
+				 <form id="importFileForm" method="post" enctype="multipart/form-data" >
+        <table style="margin:5px;height:70px;">
+            <tr>
+                <td>请选择文件</td>
+                <td width="5px;"></td>
+                <td><input type="text" id="fileImport" name="fileImport" style="width:260px;"></td>
+                <td></td></tr>
+            <tr>
+                <td colspan="4"><label id="fileName" /></td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <label id="uploadInfo"/>
+                </td>
+            </tr>
+        </table><div style="text-align:center;clear:both;margin:5px;">
+            <a id="uploadFile" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="fileupload.importFileClick();">上传</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" data-bind="click:closeImportClick" href="javascript:void(0)">关闭</a>
+        </div>
+    </form>
 			</div>
 		</div>
 	</div>
@@ -509,6 +528,7 @@
 <script type="text/javascript" src="js/shebei.js"></script>
 <script type="text/javascript" src="js/weixiu.js"></script>
 <script type="text/javascript" src="js/zhuanyi.js"></script>
+<script type="text/javascript" src="js/fileupload.js"></script>
 <style scoped="scoped">
 		.textbox{
 			height:20px;
