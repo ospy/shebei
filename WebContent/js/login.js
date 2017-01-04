@@ -34,7 +34,29 @@ $(function(){
 		}else if(!$('#password').validatebox('isValid')){
 			$('#password').focus();
 		}else{
-			alert('提交中。。。');
+			$.ajax({
+				url:'CheckLogin.do',
+				type:'post',
+				data:{
+					manager:$('#manager').val(),
+					password:$('#password').val(),
+				},
+				beforeSend:function(){
+					$.messager.progress({
+						text:"正在登录中...",
+					});
+				},
+				success:function(data,response,status){
+					$.messager.progress('close');
+					if(data>0){
+						location.href='index.jsp';
+					}else{
+						$.messager.alert('登录失败','用户名或密码错误！','warning',function(){
+							$('#password').select();
+						});
+					}
+				},
+			});
 		}
 	});
 	

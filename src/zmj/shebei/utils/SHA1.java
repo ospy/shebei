@@ -7,7 +7,7 @@ public class SHA1 {
 
 	public static void main(String[] args) {
 		//40BD001563085FC35165329EA1FF5C5ECBDBBEEF
-		System.out.println(getSHA1("123"));
+		System.out.println(getSHA1("123456"));
 		System.out.println(getSHA1("123").length());
 	}
 
