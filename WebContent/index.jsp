@@ -490,23 +490,10 @@
 			</div>
 			<div title="图片信息" style="padding: 1px">
 				 <form id="importFileForm" method="post" enctype="multipart/form-data" >
-        <table style="margin:5px;height:70px;">
-            <tr>
-                <td>请选择文件</td>
-                <td width="5px;"></td>
-                <td><input type="text" id="fileImport" name="fileImport" style="width:260px;"></td>
-                <td></td></tr>
-            <tr>
-                <td colspan="4"><label id="fileName" /></td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    <label id="uploadInfo"/>
-                </td>
-            </tr>
-        </table><div style="text-align:center;clear:both;margin:5px;">
+        <div style="text-align:center;clear:both;margin:5px;">
+        请选择文件<input type="text" id="fileImport" name="fileImport" style="width:260px;">
             <a id="uploadFile" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="fileupload.importFileClick();">上传</a>
-            <a class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" data-bind="click:closeImportClick" href="javascript:void(0)">关闭</a>
+            <label id="uploadInfo"/>
         </div>
     </form>
 			</div>
