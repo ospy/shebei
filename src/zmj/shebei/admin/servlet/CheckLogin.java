@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import zmj.shebei.admin.dao.AdminDAO;
 
@@ -23,10 +24,14 @@ public class CheckLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("manager");
 		String password = request.getParameter("password");
-		
+		int result = AdminDAO.getAdminByNameAndPwd(username, password);
+		if(result==1){
+			HttpSession session = request.getSession (true); 
+			session.setAttribute("username", username);
+		}
 		// 响应消息
 				PrintWriter out = response.getWriter();
-				out.print(AdminDAO.getAdminByNameAndPwd(username, password));
+				out.print(result);
 				out.close();
 	}
 

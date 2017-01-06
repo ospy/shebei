@@ -3,6 +3,8 @@
  */
 
 $(function(){
+	$('.images').viewer(); 
+	
 	$('#nav').tree({
 		url:'nav.do',
 		lines:true,

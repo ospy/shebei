@@ -18,6 +18,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import zmj.shebei.admin.dao.ImageDAO;
+
 @WebServlet(name = "FileUpload.do", urlPatterns = { "/FileUpload.do" })
 public class FileUpload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -93,10 +95,19 @@ public class FileUpload extends HttpServlet {
 			// 保存后图片的浏览器访问路径
 			String picUrl = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/upload/"+saveName;
 
+//			System.out.println("设备id:" + );
 			System.out.println("存放目录:" + PATH_FOLDER);
 			System.out.println("文件名:" + filename);
 			System.out.println("浏览器访问路径:" + picUrl);
 
+			//保存到数据库
+			int sbid = Integer.valueOf(request.getParameter("sbid")) ;
+			int result = ImageDAO.saveImage(sbid, saveName);
+			if(result<1){
+				info = "图片保存失败，请重试！";
+				return;
+			}
+			
 			// 真正写到磁盘上
 			item.write(new File(PATH_FOLDER, saveName)); // 第三方提供的
 			

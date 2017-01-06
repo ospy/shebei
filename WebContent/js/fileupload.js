@@ -34,52 +34,58 @@ $(function(){
     
     fileupload={
     		 importFileClick :function (){
-    			 if($('#importFileForm').form('validate')){
-    				 //获取上传文件控件内容
-     		        var file = $("#fileImport").filebox('getValue');
-     		        //判断控件中是否存在文件内容，如果不存在，弹出提示信息，阻止进一步操作
-     		        if (file == null || file == "") {  
-     		        	$.messager.alert("提示","请选择图片文件");  
-     		        	return; 
-     		        }
-     		        //获取文件名称
-     		        var fileName = file;
-//     		        var fileName = file.name;
-     		        //获取文件类型名称
-     		        var file_typename = fileName.substring(fileName.lastIndexOf('.'), fileName.length);
-     		        //这里限定上传文件文件类型必须为.xlsx，如果文件类型不符，提示错误信息
-     		        if (file_typename == '.bmp'||file_typename == '.jpg'||file_typename == '.jpeg'||file_typename == '.png')
-     		        {
-     		            //获取form数据
-     		            var formData = new FormData($("#importFileForm")[0]);
-     		            //调用apicontroller后台action方法，将form数据传递给后台处理。contentType必须设置为false,否则chrome和firefox不兼容
-     		            $.ajax({
-     		                url: "FileUpload.do",
-     		                type: 'POST',
-     		                data: formData,
-     		                async: false,
-     		                cache: false,
-     		                contentType: false,
-     		                processData: false,
-     		                success: function (returnInfo) {
-     		                    //上传成功后将控件内容清空，并显示上传成功信息
-     		                    document.getElementById('fileImport').value = null;
-     		                    document.getElementById('uploadInfo').innerHTML = "<span style='color:Red'>" + returnInfo + "</span>";
-     		                },
-     		                error: function (returnInfo) {
-     		                    //上传失败时显示上传失败信息
-     		                    document.getElementById('uploadInfo').innerHTML = "<span style='color:Red'>" + returnInfo + "</span>";
-     		                }
-     		            });
-     		        }
-     		        else {
-     		        	$.messager.alert("提示","文件类型错误，只能上传图片文件。");
-     		            //将错误信息显示在前端label文本中
-//     		            document.getElementById('fileName').innerHTML = "<span style='color:Red'>错误提示:上传文件应该是图片文件，后缀而不应该是" + file_typename + ",请重新选择文件</span>"
-     		        }
+    			 var rows = $('#shebei').datagrid('getSelected');
+    			 if(rows){
+    				 if($('#importFileForm').form('validate')){
+        				 //获取上传文件控件内容
+         		        var file = $("#fileImport").filebox('getValue');
+         		        //判断控件中是否存在文件内容，如果不存在，弹出提示信息，阻止进一步操作
+         		        if (file == null || file == "") {  
+         		        	$.messager.alert("提示","请选择图片文件");  
+         		        	return; 
+         		        }
+         		        //获取文件名称
+         		        var fileName = file;
+//         		        var fileName = file.name;
+         		        //获取文件类型名称
+         		        var file_typename = fileName.substring(fileName.lastIndexOf('.'), fileName.length);
+         		        //这里限定上传文件文件类型必须为.xlsx，如果文件类型不符，提示错误信息
+         		        if (file_typename == '.bmp'||file_typename == '.jpg'||file_typename == '.jpeg'||file_typename == '.png')
+         		        {
+         		            //获取form数据
+         		            var formData = new FormData($("#importFileForm")[0]);
+         		            //调用apicontroller后台action方法，将form数据传递给后台处理。contentType必须设置为false,否则chrome和firefox不兼容
+         		            $.ajax({
+         		                url: "FileUpload.do?sbid="+rows.id,
+         		                type: 'POST',
+         		                data: formData,
+         		                async: false,
+         		                cache: false,
+         		                contentType: false,
+         		                processData: false,
+         		                success: function (returnInfo) {
+         		                    //上传成功后将控件内容清空，并显示上传成功信息
+         		                    document.getElementById('fileImport').value = null;
+         		                    document.getElementById('uploadInfo').innerHTML = "<span style='color:Red'>" + returnInfo + "</span>";
+         		                },
+         		                error: function (returnInfo) {
+         		                    //上传失败时显示上传失败信息
+         		                    document.getElementById('uploadInfo').innerHTML = "<span style='color:Red'>" + returnInfo + "</span>";
+         		                }
+         		            });
+         		        }
+         		        else {
+         		        	$.messager.alert("提示","文件类型错误，只能上传图片文件。");
+         		            //将错误信息显示在前端label文本中
+//         		            document.getElementById('fileName').innerHTML = "<span style='color:Red'>错误提示:上传文件应该是图片文件，后缀而不应该是" + file_typename + ",请重新选择文件</span>"
+         		        }
+        			 }else{
+        				 $.messager.alert("提示","请选择图片文件，且大小不能超过5M");  return;
+        			 }
     			 }else{
-    				 $.messager.alert("提示","请选择图片文件，且大小不能超过5M");  return;
+    				 $.messager.alert('提示','请先选择要添加图片的设备！','info'); 
     			 }
+    			 
     		       
     		    }
     };

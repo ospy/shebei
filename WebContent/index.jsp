@@ -1,3 +1,9 @@
+<%String username = (String)session.getAttribute("username");
+if(username ==null || username.equals("")){
+	 response.setHeader("Refresh","0;url=login.jsp");
+	 return;
+}
+%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
 <link rel="stylesheet" type="text/css" href="css/admin.css">
+<link rel="stylesheet" href="css/viewer.css" type="text/css"> 
 
 <script type="text/javascript" src="easyui/jquery.min.js"></script>
 <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
@@ -15,7 +22,10 @@
 </head>
 <body class="easyui-layout">
 
-	<div data-options="region:'north',border:false" style="height: 60px;  padding: 1px" class="north_el"></div>
+	<div data-options="region:'north',border:false" style="height: 60px;  padding: 1px" class="north_el">
+		<div class="logo">后台管理</div>
+		<div class="logout">您好：<%=session.getAttribute("username") %> | <a href="Logout.do">退出</a></div>
+	</div>
 	
 	<div data-options="region:'west',split:true,title:'导航',iconCls:'icon-icon146'" style="width: 150px; padding: 1px;">
 		<ul id="nav"></ul>
@@ -490,12 +500,19 @@
 			</div>
 			<div title="图片信息" style="padding: 1px">
 				 <form id="importFileForm" method="post" enctype="multipart/form-data" >
-        <div style="text-align:center;clear:both;margin:5px;">
-        请选择文件<input type="text" id="fileImport" name="fileImport" style="width:260px;">
-            <a id="uploadFile" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="fileupload.importFileClick();">上传</a>
-            <label id="uploadInfo"/>
-        </div>
-    </form>
+			        <div style="text-align:center;clear:both;margin:5px;">
+			        请选择文件<input type="text" id="fileImport" name="fileImport" style="width:260px;">
+			            <a id="uploadFile" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="fileupload.importFileClick();">上传</a>
+			            <label id="uploadInfo"/>
+			        </div>
+			    </form>
+			    <div>
+				  <ul class="images">
+				    <img src="upload/1483670514135.jpg" width="130px" height="130px" alt="Picture">
+				    <img src="upload/1482370620251.jpg" width="130px" height="130px"  alt="Picture 2">
+				    <img src="upload/1482370353992.jpg" width="130px" height="130px"  alt="Picture 3">
+				  </ul>
+				</div> 
 			</div>
 		</div>
 	</div>
@@ -516,6 +533,7 @@
 <script type="text/javascript" src="js/weixiu.js"></script>
 <script type="text/javascript" src="js/zhuanyi.js"></script>
 <script type="text/javascript" src="js/fileupload.js"></script>
+<script type="text/javascript" src="js/viewer.js"></script>      
 <style scoped="scoped">
 		.textbox{
 			height:20px;

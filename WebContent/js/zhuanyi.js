@@ -173,7 +173,7 @@ $(function(){
 							if(data>0){
 								$.messager.show({
 									title:'提示',
-									msg:'修改维修记录成功',
+									msg:'修改转移记录成功',
 								});
 								$('#zhuanyi_edit').dialog('close').form('reset');
 								$('#zhuanyi').datagrid('reload');//刷新
@@ -212,7 +212,6 @@ $(function(){
 			add:function(){
 				var rows = $('#shebei').datagrid('getSelected');
 				if(rows){
-
 					$.ajax({
 						url:'getShebei.do',
 						type:'post',
