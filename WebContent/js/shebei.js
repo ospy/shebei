@@ -87,24 +87,11 @@ $(function(){
 		required:true,
 		onSelect: function(rec){    
             var url = 'getYbfenlei.do?pid='+rec.id;    
-            $('#groupxl').combobox('reload', url);    
+            $('#groupxl').combobox('reload', url);
         }
 	});
 	
-	
-	//检索设备时 科室下拉列表
-	$('#sykeshi_search').combobox({
-		url:'getkeshi.do',
-		valueField:'id',
-		textField:'keshiname',
-		queryParams:{
-			"getall":"all",
-		},
-		editable:false,
-		multiple:true,
-	});
-	
-	
+
 	//添加设备时 医保小类下拉列表
 	$('#groupxl').combobox({
 		url:'getYbfenlei.do',
@@ -127,6 +114,18 @@ $(function(){
 		},
 		editable:false,
 		required:true,
+	});
+	
+	//检索设备时 科室下拉列表
+	$('#sykeshi_search').combobox({
+		url:'getkeshi.do',
+		valueField:'id',
+		textField:'keshiname',
+		queryParams:{
+			"getall":"all",
+		},
+		editable:false,
+		multiple:true,
 	});
 		
 	//添加设备时 厂家下拉列表

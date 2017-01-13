@@ -86,7 +86,7 @@ public class ShebeiData extends HttpServlet {
 		
 		String sql = "select a.*, b.keshiname from shebei a, keshi b where a.sykeshi=b.id "+sqlwhere+" order by " + sort + " " + order + " limit " + first + ", "
 				+ pagesize;
-		System.out.println(sql);
+//		System.out.println(sql);
 		Connection conn = DBPool.getInstance().getConnection();
 		Statement stmt = null;
 		ResultSet rs = null;

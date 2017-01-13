@@ -11,52 +11,17 @@
 
 <script type="text/javascript" src="../easyui/jquery.min.js"></script>
 <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
-
+<script type="text/javascript">
+$.getJSON("../GetImageJsonTest", function(data){
+	 $.each(data, function(i,item){
+		    $("<img width='200px' height='200px'/>").attr("src", "../upload/"+item.filename).appendTo("#images");
+		    if ( i == 3 ) return false;
+		 // alert(item);
+		  });
+		},"json");
+</script>
 </head>
 <body>
-<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="shebei_tool.add()">Add</a>
-<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="shebei_tool2.add()">Add</a>
-<form id="test_add">
-		<input class="easyui-datebox"></input>
-</form>
-<form id="test_add2">
-		22<input class="easyui-datebox"></input>
-</form>
-
-
-
-
-
-<div class="easyui-panel" title="Nested Panel" style="width:700px;height:200px;padding:10px;">
-		<div class="easyui-layout" data-options="fit:true">
-			<div data-options="region:'west',split:true" style="width:100px;padding:10px">
-				Left Content
-			</div>
-			<div data-options="region:'east'" style="width:100px;padding:10px">
-				Right Content
-			</div>
-			<div data-options="region:'center'" style="padding:10px">
-				<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="shebei_tool.add()">Add</a>
-			
-			<div class="easyui-tabs" style="width:700px;height:250px">
-		<div title="About" style="padding:10px">
-			<p style="font-size:14px">jQuery EasyUI framework helps you build your web pages easily.</p>
-			<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="shebei_tool.add()">Add</a>
-		</div>
-		<div title="My Documents" style="padding:10px">
-			322
-		</div>
-		<div title="Help" data-options="iconCls:'icon-help',closable:true" style="padding:10px">
-			This is the help content.
-		</div>
-	</div>
-			
-			</div>
-		</div>
-	</div>
-
-
-<script type="text/javascript" src="test.js"></script>
-<script type="text/javascript" src="test2.js"></script>
+<div id="images"></div>
 </body>
 </html>
