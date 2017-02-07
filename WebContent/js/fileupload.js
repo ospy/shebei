@@ -1,23 +1,6 @@
-
-
-
 $(function(){
-	//导入事件，显示导入弹出窗口
-    this.importClick = function ()
-    {
-        $('#import-excel-template').window('open')
-　　　　 document.getElementById("importFileForm").style.display = "block";
-    }
-    //关闭导入弹出窗口
-    this.closeImportClick = function () {
-        document.getElementById('fileImport').value = null;
-//        document.getElementById('fileName').innerHTML = "";
-        document.getElementById('uploadInfo').innerHTML = "";
-        $('#import-excel-template').window('close')
-    }
     
-    
-    $('#fileImport').filebox({    
+        $('#fileImport').filebox({    
     	validType : ['fileSize[1024,"kb"]' ],  
     	accept : [ 'image/jpg', 'image/bmp', 'image/jpeg', 'image/gif', 'image/png' ],
     	buttonText: '选择文件', 
@@ -26,9 +9,8 @@ $(function(){
         required:true,
         onChange : function(e) {
         	document.getElementById('uploadInfo').innerHTML = "<span style='color:Red'></span>";
-//        	document.getElementById('fileName').innerHTML = "<span style='color:Red'></span>";
         	}
-    })
+    });
     
     //导入文件
     
@@ -67,6 +49,13 @@ $(function(){
          		                    //上传成功后将控件内容清空，并显示上传成功信息
          		                    document.getElementById('fileImport').value = null;
          		                    document.getElementById('uploadInfo').innerHTML = "<span style='color:Red'>" + returnInfo + "</span>";
+         		                    $('#images').load('ShebeiImage.do',{
+										method:'getImage',
+										sbid:row.id,
+									});
+         		                    // $.getScript("js/viewer.js",function(){
+						 				 // $('#images').viewer();
+						 			// });
          		                },
          		                error: function (returnInfo) {
          		                    //上传失败时显示上传失败信息

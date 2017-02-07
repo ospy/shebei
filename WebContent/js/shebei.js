@@ -52,12 +52,26 @@ $(function(){
 		sortOrder:'desc',
 		toolbar:'#shebei_tb',
 		onDblClickRow:function(index,row){
+			//刷新维修数据
 			$('#weixiu').datagrid('reload',{
 				id:row.id,
-			});//刷新维修数据
+			});
+			//刷新转移数据
 			$('#zhuanyi').datagrid('reload',{
 				id:row.id,
-			});//刷新转移数据
+			});
+			//刷新图片
+			$('#images').load('ShebeiImage.do',{
+				method:'getImage',
+				sbid:row.id,
+			},function(){
+ 				 // $('#images').viewer();
+ 				// alert("im2g");
+ 				});
+			// $.getScript("js/viewer.js",function(){
+ 				 // $('#images').viewer();
+ 				// // alert("img");
+ 				// });
 		},
 		columns:[[{
 			title:"自动编号",field:'id',width:100,checkbox:true,		},

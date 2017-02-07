@@ -507,10 +507,7 @@ if(username ==null || username.equals("")){
 			        </div>
 			    </form>
 			    <div>
-				  <ul class="images">
-				    <img src="upload/1483670514135.jpg" width="130px" height="130px" alt="Picture">
-				    <img src="upload/1482370620251.jpg" width="130px" height="130px"  alt="Picture 2">
-				    <img src="upload/1482370353992.jpg" width="130px" height="130px"  alt="Picture 3">
+				  <ul id="images">
 				  </ul>
 				</div> 
 			</div>
@@ -533,7 +530,10 @@ if(username ==null || username.equals("")){
 <script type="text/javascript" src="js/weixiu.js"></script>
 <script type="text/javascript" src="js/zhuanyi.js"></script>
 <script type="text/javascript" src="js/fileupload.js"></script>
+<!-- 55 -->
+<%-- --%>
 <script type="text/javascript" src="js/viewer.js"></script>      
+
 <style scoped="scoped">
 		.textbox{
 			height:20px;
